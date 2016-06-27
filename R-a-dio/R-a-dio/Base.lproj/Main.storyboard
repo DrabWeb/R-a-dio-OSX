@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <scenes>
@@ -663,7 +662,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="HXN-xB-AI8"/>
                                         </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="Song Title" id="duN-10-NsU">
+                                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="Loading..." id="duN-10-NsU">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -740,9 +739,14 @@
                                             <action selector="lastPlayedButtonPressed:" target="XfG-lQ-9wD" id="xGZ-4X-DUb"/>
                                         </connections>
                                     </button>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="fBK-Uz-ZUo" userLabel="Loading Spinner">
+                                        <rect key="frame" x="129" y="45" width="32" height="32"/>
+                                    </progressIndicator>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="x8M-u6-xYK" secondAttribute="bottom" id="2SF-DF-BLK"/>
+                                    <constraint firstItem="fBK-Uz-ZUo" firstAttribute="centerX" secondItem="hTT-Ri-HO1" secondAttribute="centerX" id="6aB-19-0NH"/>
+                                    <constraint firstItem="fBK-Uz-ZUo" firstAttribute="centerY" secondItem="7u7-Hs-aHA" secondAttribute="centerY" id="CJa-wi-vjc"/>
                                     <constraint firstItem="hTT-Ri-HO1" firstAttribute="leading" secondItem="p1Q-Gc-lkO" secondAttribute="trailing" constant="8" id="E9i-dd-NjO"/>
                                     <constraint firstItem="nW2-4o-b0b" firstAttribute="leading" secondItem="pAE-Af-ffp" secondAttribute="trailing" constant="8" id="NKf-oF-kpE"/>
                                     <constraint firstItem="x8M-u6-xYK" firstAttribute="leading" secondItem="nW2-4o-b0b" secondAttribute="trailing" constant="8" id="OVp-FL-oPq"/>
@@ -799,6 +803,7 @@
                         <outlet property="currentSongDurationLabel" destination="nW2-4o-b0b" id="6DW-ub-n7u"/>
                         <outlet property="currentSongPositionLabel" destination="ape-5f-kMn" id="CGW-CA-mLN"/>
                         <outlet property="currentSongProgressProgressBar" destination="pAE-Af-ffp" id="l24-Wt-kdQ"/>
+                        <outlet property="loadingSpinner" destination="fBK-Uz-ZUo" id="Byc-FQ-e4l"/>
                         <outlet property="pausePlayButton" destination="4ZK-yH-Fih" id="nSF-3Y-HJ9"/>
                         <outlet property="songTitleTextField" destination="hTT-Ri-HO1" id="LYm-RM-g8Q"/>
                         <outlet property="volumeBarVisualEffectView" destination="4wM-em-LAw" id="lha-QS-1VO"/>
@@ -807,7 +812,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="74" y="201"/>
         </scene>
     </scenes>
     <resources>

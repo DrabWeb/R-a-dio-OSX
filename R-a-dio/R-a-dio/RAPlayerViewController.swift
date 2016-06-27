@@ -23,6 +23,9 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
     /// The visual effect view that holds the volume slider
     @IBOutlet var volumeBarVisualEffectView: NSVisualEffectView!
     
+    /// The spinner that shows that the r/a/dio stream is loading
+    @IBOutlet var loadingSpinner: NSProgressIndicator!
+    
     /// The volume slider in volumeBarVisualEffectView
     @IBOutlet weak var volumeSlider: NSSlider!
     
@@ -166,6 +169,9 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         // Observe radioPlayer's status so we can play it when it loads
         radioPlayer!.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.New, context: nil);
         
+        // Start the loading spinner
+        loadingSpinner.startAnimation(self);
+        
         // Do the initial volume update
         radioPlayer!.volume = volumeSlider.floatValue;
     }
@@ -177,6 +183,14 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
             if(radioPlayer!.status == AVPlayerStatus.ReadyToPlay) {
                 // Start playing the r/a/dio player
                 radioPlayer!.play();
+                
+                // Hide and stop the loading spinner
+                loadingSpinner.hidden = true;
+                loadingSpinner.stopAnimation(self);
+                
+                // Show and enable the pause/play button
+                pausePlayButton.hidden = false;
+                pausePlayButton.enabled = true;
             }
             // If the r/a/dio player failed...
             else if(radioPlayer!.status == AVPlayerStatus.Failed) {
@@ -287,6 +301,10 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         window.titleVisibility = .Hidden;
         window.styleMask |= NSFullSizeContentViewWindowMask;
         window.titlebarAppearsTransparent = true;
+        
+        // Hide and disable the pause/play button
+        pausePlayButton.hidden = true;
+        pausePlayButton.enabled = false;
     }
 }
 
