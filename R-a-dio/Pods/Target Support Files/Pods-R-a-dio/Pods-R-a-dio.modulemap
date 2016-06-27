@@ -1,0 +1,6 @@
+framework module Pods_R_a_dio {
+  umbrella header "Pods-R-a-dio-umbrella.h"
+
+  export *
+  module * { export * }
+}

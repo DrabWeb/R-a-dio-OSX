@@ -1,2 +1,2 @@
-# R-a-dio-OSX
-A r/a/dio(https://r-a-d.io) front end for OSX
+# R/a/dio OSX
+A small, menubar based <a href="https://r-a-d.io">R/a/dio</a> front end for OSX

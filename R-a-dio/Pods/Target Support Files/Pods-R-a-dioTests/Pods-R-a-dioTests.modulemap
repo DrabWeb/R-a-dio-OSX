@@ -1,0 +1,6 @@
+framework module Pods_R_a_dioTests {
+  umbrella header "Pods-R-a-dioTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
