@@ -55,6 +55,38 @@ class RASong {
     /// The date this song ended/ends at(Only applies if this is the current playing song)
     var endTime : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(0));
     
+    /// Returns the display string for how many minutes until this song starts/how many minutes ago it ended(E.g. "5 mins" or "less than a min")
+    var startTimeFromNow : String {
+        /// The date components of the difference of the current date and startTime
+        var nowStartDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: NSDate(timeIntervalSince1970: NSDate().timeIntervalSinceDate(self.startTime)));
+        
+        // If the difference between the current date and startTime is negative...
+        if(NSDate().timeIntervalSinceDate(self.startTime) < 0) {
+            // Swap their positions and update nowStartDateComponents
+            nowStartDateComponents = NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: NSDate(timeIntervalSince1970: self.startTime.timeIntervalSinceDate(NSDate())));
+        }
+        
+        /// How many minutes until the song starts/ago it ended
+        var minutes : Int = nowStartDateComponents.minute;
+        
+        // If the seconds are more than or equal to 30...
+        if(nowStartDateComponents.second >= 30) {
+            // Add one to minutes for rounding
+            minutes += 1;
+        }
+        
+        /// If minutes is one or zero...
+        if(minutes == 0 || minutes == 1) {
+            // Return "less than a min"
+            return "less than a min";
+        }
+        // If minutes is not 1...
+        else {
+            // Return "X mins"
+            return "\(minutes) mins";
+        }
+    }
+    
     /// Returns the NSDate for the current playing position of this song
     var positionDate : NSDate {
         return NSDate(timeIntervalSince1970: NSDate().timeIntervalSinceDate(self.endTime));

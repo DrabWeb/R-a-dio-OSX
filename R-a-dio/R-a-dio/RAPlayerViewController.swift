@@ -48,8 +48,8 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         
         // For every song in the last played songs in currentRadioInfo...
         for(_, currentLastPlayedSong) in currentRadioInfo.lastPlayed.enumerate() {
-            // Add an item with the current song's title to lastPlayedMenu
-            lastPlayedMenu.addItemWithTitle(currentLastPlayedSong.name, action: Selector(""), keyEquivalent: "");
+            // Add an item with the current song's title with how long ago it played to lastPlayedMenu
+            lastPlayedMenu.addItemWithTitle("\(currentLastPlayedSong.name) - \(currentLastPlayedSong.startTimeFromNow) ago", action: Selector(""), keyEquivalent: "");
         }
         
         // Show the last played menu at the last played button's position
@@ -69,8 +69,8 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         
         // For every song in the queued songs in currentRadioInfo...
         for(_, currentQueuedSong) in currentRadioInfo.queue.enumerate() {
-            // Add an item with the current song's title to queueMenu
-            queueMenu.addItemWithTitle(currentQueuedSong.name, action: Selector(""), keyEquivalent: "");
+            // Add an item with the current song's title with it's start time to queueMenu
+            queueMenu.addItemWithTitle("\(currentQueuedSong.name) - in \(currentQueuedSong.startTimeFromNow)", action: Selector(""), keyEquivalent: "");
         }
         
         // Show the queued songs menu at the queued songs button's position
