@@ -27,9 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create applicationStatusItemPopupViewController
         applicationStatusItemPopupViewController = (NSStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateControllerWithIdentifier("playerViewController") as! RAPlayerViewController);
         
-        // Set the theme
-        applicationStatusItemPopupViewController!.currentTheme = applicationTheme;
-        
         // Set the default time zone of the application to GMT
         NSTimeZone.setDefaultTimeZone(NSTimeZone(abbreviation: "GMT")!);
         
@@ -55,6 +52,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     /// Called when applicationStatusItem is pressed
     func applicationStatusItemPressed() {
+        // If the user is using the OSX dark theme...
+        if(NSAppearance.currentAppearance().name.hasPrefix("NSAppearanceNameVibrantDark")) {
+            // Set applicationTheme accordingly
+            applicationTheme = .Dark;
+        }
+        // If the user is using the OSX light theme...
+        else if(NSAppearance.currentAppearance().name.hasPrefix("NSAppearanceNameVibrantLight")) {
+            // Set applicationTheme accordingly
+            applicationTheme = .Light;
+        }
+        
+        // Set applicationStatusItemPopupViewController's theme
+        applicationStatusItemPopupViewController!.currentTheme = applicationTheme;
+        
+        // Reload applicationStatusItemPopupViewController's theme
+        applicationStatusItemPopupViewController!.reapplyTheme();
+        
         // Dismiss the popup, if its open
         applicationStatusItemPopupViewController!.dismissController(self);
         
