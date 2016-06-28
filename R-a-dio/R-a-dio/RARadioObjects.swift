@@ -87,38 +87,6 @@ class RASong {
         }
     }
     
-    /// Returns the NSDate for the current playing position of this song
-    var positionDate : NSDate {
-        return NSDate(timeIntervalSince1970: NSDate().timeIntervalSinceDate(self.endTime));
-    }
-    
-    /// The display label for the current playing position of this song
-    var positionString : String {
-        /// The minute and second components of positionDate
-        let positionDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: positionDate);
-        
-        /// The display string for the seconds value
-        var secondsString : String = String(positionDateComponents.second);
-        
-        // If there is only one character in secondsString...
-        if(secondsString.characters.count == 1) {
-            // Append a 0 to the front
-            secondsString = "0\(secondsString)";
-        }
-        
-        // Return the position string
-        return "\(positionDateComponents.minute):\(secondsString)";
-    }
-    
-    /// The current playing position of this song, in seconds
-    var positionSeconds : Int {
-        /// The date components for the current playing position of this song
-        let positionDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Second, NSCalendarUnit.Minute], fromDate: positionDate);
-        
-        // Return the position in seconds
-        return positionDateComponents.second + (positionDateComponents.minute * 60);
-    }
-    
     /// Returns the NSDate for the duration of this song
     var durationDate : NSDate {
         return NSDate(timeIntervalSince1970: self.endTime.timeIntervalSinceDate(self.startTime));
@@ -176,6 +144,21 @@ class RASong {
 class RARadioInfo {
     /// The current song that is playing
     var currentSong : RASong = RASong();
+    
+    /// The position of the current song
+    var currentSongPosition : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(0));
+    
+    /// Returns the date components of currentSongPosition(Minutes and Seconds)
+    var currrentSongPositionDateComponents : NSDateComponents {
+        // Return the date components
+        return NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: currentSongPosition);
+    }
+    
+    /// Calculates currentSongPosition and sets it, based on it's current value
+    func updateCurrentSongPosition() {
+        // Calculate and set currentSongPosition
+        self.currentSongPosition = NSDate(timeIntervalSince1970: self.currentSongPosition.timeIntervalSince1970 - self.currentSong.startTime.timeIntervalSince1970);
+    }
     
     /// The current DJ
     var currentDj : RADJ = RADJ();

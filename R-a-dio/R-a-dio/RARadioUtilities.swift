@@ -28,6 +28,10 @@ class RARadioUtilities {
                 // Parse the JSON
                 radioInfo.currentSong = RASong(name: responseJson["main"]["np"].stringValue, startTime: NSDate(timeIntervalSince1970: NSTimeInterval(responseJson["main"]["start_time"].intValue)), endTime: NSDate(timeIntervalSince1970: NSTimeInterval(responseJson["main"]["end_time"].intValue)));
                 
+                radioInfo.currentSongPosition = NSDate(timeIntervalSince1970: NSTimeInterval(responseJson["main"]["current"].intValue));
+                
+                radioInfo.updateCurrentSongPosition();
+                
                 radioInfo.currentDj = RADJ(json: responseJson["main"]["dj"]);
                 
                 radioInfo.listeners = responseJson["main"]["listeners"].intValue;

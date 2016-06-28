@@ -127,6 +127,30 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
     /// The AVPlayer for playing the r/a/dio stream
     var radioPlayer : AVPlayer? = nil;
     
+    /// The position of the current song, in seconds
+    var currentSongPositionSeconds : Int = 0;
+    
+    /// The display string for currentSongPositionSeconds, in the format "MM:SS"
+    var currentSongPositionSecondsString : String {
+        /// The date from currentSongPositionSeconds
+        let currentSongPositionSecondsDate : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(currentSongPositionSeconds));
+        
+        /// The date components of currentSongPositionSecondsDate
+        let currentSongPositionSecondsDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: currentSongPositionSecondsDate);
+        
+        /// The display string for the seconds value
+        var secondsString : String = String(currentSongPositionSecondsDateComponents.second);
+        
+        // If there is only one character in secondsString...
+        if(secondsString.characters.count == 1) {
+            // Append a 0 to the front
+            secondsString = "0\(secondsString)";
+        }
+        
+        // Return the position string
+        return "\(currentSongPositionSecondsDateComponents.minute):\(secondsString)";
+    }
+    
     override func rightMouseDown(theEvent: NSEvent) {
         super.rightMouseDown(theEvent);
         
@@ -227,7 +251,11 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         currentRadioInfo = radioInfo;
         
         // Display the radio info
+        // Set the title label to the current song's name
         songTitleTextField.stringValue = radioInfo.currentSong.name;
+        
+        // Set currentSongPositionSeconds
+        currentSongPositionSeconds = Int(radioInfo.currentSongPosition.timeIntervalSince1970);
         
         // If the DJ is different...
         if(lastDj.name != currentRadioInfo.currentDj.name) {
@@ -242,14 +270,17 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         lastDj = currentRadioInfo.currentDj;
     }
     
-    /// Updates the position/duration labels and the playing progress bar. Called once every half second
+    /// Updates the position/duration labels and the playing progress bar. Called every second
     func updatePositionDurationProgressViews() {
+        // Add one second to currentSongPositionSeconds
+        currentSongPositionSeconds += 1;
+        
         // Update the position/duration labels
-        currentSongPositionLabel.stringValue = currentRadioInfo.currentSong.positionString;
+        currentSongPositionLabel.stringValue = currentSongPositionSecondsString;
         currentSongDurationLabel.stringValue = currentRadioInfo.currentSong.durationString;
         
         // Update the progress bar
-        currentSongProgressProgressBar.doubleValue = Double((Float(currentRadioInfo.currentSong.positionSeconds) / Float(currentRadioInfo.currentSong.durationSeconds)) * 100);
+        currentSongProgressProgressBar.doubleValue = Double((Float(currentSongPositionSeconds) / Float(currentRadioInfo.currentSong.durationSeconds)) * 100);
     }
     
     /// Re-applies currentTheme
