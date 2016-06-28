@@ -281,6 +281,18 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         
         // Update the progress bar
         currentSongProgressProgressBar.doubleValue = Double((Float(currentSongPositionSeconds) / Float(currentRadioInfo.currentSong.durationSeconds)) * 100);
+        
+        // If this view controller is open...
+        if(self.view.window != nil) {
+            /// If we are at the end of the song...
+            if(currentSongPositionSeconds == (currentRadioInfo.currentSong.durationSeconds + 1)) {
+                // If the duration is more than 0(Meaning its loaded)...
+                if(currentRadioInfo.currentSong.durationSeconds > 0) {
+                    // Reload the r/a/dio info
+                    reloadRadioInfo();
+                }
+            }
+        }
     }
     
     /// Re-applies currentTheme
