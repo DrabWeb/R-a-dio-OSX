@@ -10,6 +10,8 @@
 		1C4197FF21B09CCE44DEC73A /* Pods_R_a_dio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6771E37FCD606BE17CF97E0C /* Pods_R_a_dio.framework */; };
 		21C968651C0A1A58D147D6EA /* Pods_R_a_dioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5EAD1303242AFD079809E11 /* Pods_R_a_dioUITests.framework */; };
 		40D29F8C7F7833798369821A /* Pods_R_a_dioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7072E3A9AB04CBF6368ABF65 /* Pods_R_a_dioTests.framework */; };
+		5D14D7FD1D22EDCC00022571 /* RASongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14D7FC1D22EDCC00022571 /* RASongListTableViewCell.swift */; };
+		5D14D8011D23033000022571 /* RAPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14D8001D23033000022571 /* RAPreferences.swift */; };
 		5DB96ABD1D218807009B497F /* RARadioUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB96ABC1D218807009B497F /* RARadioUtilities.swift */; };
 		5DB96AC01D218840009B497F /* RARadioObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB96ABF1D218840009B497F /* RARadioObjects.swift */; };
 		5DB96AC31D218DD2009B497F /* DKAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB96AC21D218DD2009B497F /* DKAsyncImageView.swift */; };
@@ -20,6 +22,8 @@
 		5DC72E911D21724200E17706 /* R_a_dioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC72E901D21724200E17706 /* R_a_dioTests.swift */; };
 		5DC72E9C1D21724200E17706 /* R_a_dioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC72E9B1D21724200E17706 /* R_a_dioUITests.swift */; };
 		5DC72EAE1D2186C800E17706 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC72EAD1D2186C800E17706 /* SwiftyJSON.swift */; };
+		5DF0E7CE1D22CAC300F1C764 /* RARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF0E7CD1D22CAC300F1C764 /* RARequestViewController.swift */; };
+		5DF9B0C51D25877D00DCF688 /* RAAlwaysActiveViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF9B0C41D25877D00DCF688 /* RAAlwaysActiveViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,8 @@
 		03136AC6FF4771815A8D58CF /* Pods-R-a-dioUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dioUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dioUITests/Pods-R-a-dioUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		05A9AF6E78EEC86326B9118F /* Pods-R-a-dioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dioTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dioTests/Pods-R-a-dioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1277D4D0B78081917597A0CC /* Pods-R-a-dio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dio.release.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dio/Pods-R-a-dio.release.xcconfig"; sourceTree = "<group>"; };
+		5D14D7FC1D22EDCC00022571 /* RASongListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RASongListTableViewCell.swift; sourceTree = "<group>"; };
+		5D14D8001D23033000022571 /* RAPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAPreferences.swift; sourceTree = "<group>"; };
 		5DB96ABC1D218807009B497F /* RARadioUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RARadioUtilities.swift; sourceTree = "<group>"; };
 		5DB96ABF1D218840009B497F /* RARadioObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RARadioObjects.swift; sourceTree = "<group>"; };
 		5DB96AC21D218DD2009B497F /* DKAsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKAsyncImageView.swift; sourceTree = "<group>"; };
@@ -59,6 +65,8 @@
 		5DC72E9B1D21724200E17706 /* R_a_dioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R_a_dioUITests.swift; sourceTree = "<group>"; };
 		5DC72E9D1D21724200E17706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DC72EAD1D2186C800E17706 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		5DF0E7CD1D22CAC300F1C764 /* RARequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RARequestViewController.swift; sourceTree = "<group>"; };
+		5DF9B0C41D25877D00DCF688 /* RAAlwaysActiveViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAAlwaysActiveViews.swift; sourceTree = "<group>"; };
 		6771E37FCD606BE17CF97E0C /* Pods_R_a_dio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_R_a_dio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7072E3A9AB04CBF6368ABF65 /* Pods_R_a_dioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_R_a_dioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D22AD193B24A0378121223 /* Pods-R-a-dio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dio/Pods-R-a-dio.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,10 +126,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5D14D7FB1D22EDA100022571 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D14D7FC1D22EDCC00022571 /* RASongListTableViewCell.swift */,
+				5DF9B0C41D25877D00DCF688 /* RAAlwaysActiveViews.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		5DB96ABB1D218757009B497F /* Objects */ = {
 			isa = PBXGroup;
 			children = (
 				5DB96ABF1D218840009B497F /* RARadioObjects.swift */,
+				5D14D8001D23033000022571 /* RAPreferences.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -161,7 +179,9 @@
 			children = (
 				5DC72E7E1D21724200E17706 /* AppDelegate.swift */,
 				5DC72E801D21724200E17706 /* RAPlayerViewController.swift */,
+				5DF0E7CD1D22CAC300F1C764 /* RARequestViewController.swift */,
 				5DC72EAA1D21869100E17706 /* Storyboards */,
+				5D14D7FB1D22EDA100022571 /* Views */,
 				5DB96ABB1D218757009B497F /* Objects */,
 				5DC72EAB1D21869A00E17706 /* Utilities */,
 				5DC72EAC1D2186A300E17706 /* Libraries */,
@@ -484,11 +504,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB96AC31D218DD2009B497F /* DKAsyncImageView.swift in Sources */,
+				5D14D7FD1D22EDCC00022571 /* RASongListTableViewCell.swift in Sources */,
 				5DB96AC01D218840009B497F /* RARadioObjects.swift in Sources */,
 				5DC72EAE1D2186C800E17706 /* SwiftyJSON.swift in Sources */,
 				5DC72E811D21724200E17706 /* RAPlayerViewController.swift in Sources */,
+				5D14D8011D23033000022571 /* RAPreferences.swift in Sources */,
+				5DF9B0C51D25877D00DCF688 /* RAAlwaysActiveViews.swift in Sources */,
 				5DC72E7F1D21724200E17706 /* AppDelegate.swift in Sources */,
 				5DB96ABD1D218807009B497F /* RARadioUtilities.swift in Sources */,
+				5DF0E7CE1D22CAC300F1C764 /* RARequestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

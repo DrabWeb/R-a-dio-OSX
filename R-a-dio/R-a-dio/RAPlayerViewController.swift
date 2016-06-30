@@ -9,10 +9,7 @@ import Cocoa
 import AVKit
 import AVFoundation
 
-class RAPlayerViewController: NSViewController, NSWindowDelegate {
-    
-    /// The main window of this view controller
-    var window : NSWindow = NSWindow();
+class RAPlayerViewController: NSViewController {
     
     /// The default DJ image
     var hanyuu : NSImage = NSImage(named: "Hanyuu")!;
@@ -79,6 +76,9 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         // Show the queued songs menu at the queued songs button's position
         queueMenu.popUpMenuPositioningItem(nil, atLocation: NSPoint(x: 0, y: 0), inView: sender);
     }
+    
+    /// The button that the user can press to request a song to be played on r/a/dio
+    @IBOutlet var requestButton: NSButton!
     
     /// The pause/play button
     @IBOutlet var pausePlayButton: NSButton!
@@ -156,6 +156,15 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         
         /// The context menu to show
         let menu : NSMenu = NSMenu();
+        
+        /// The song request menu item
+        let songRequestMenuItem : NSMenuItem = NSMenuItem(title: "Request A Song", action: requestButton.action, keyEquivalent: "r");
+        
+        // Set the song request menu item's target
+        songRequestMenuItem.target = requestButton.target;
+        
+        // Add the request song menu item
+        menu.addItem(songRequestMenuItem);
         
         // Add the quit menu item
         menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit"), keyEquivalent: "q"));
@@ -322,29 +331,8 @@ class RAPlayerViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    func windowWillEnterFullScreen(notification: NSNotification) {
-        // Set the window's appearance to match the background visual effect view
-        window.appearance = backgroundVisualEffectView.appearance;
-    }
-    
-    func windowDidExitFullScreen(notification: NSNotification) {
-        // Set back the window's appearance
-        window.appearance = NSAppearance(named: NSAppearanceNameAqua);
-    }
-    
     /// Styles the window
     func styleWindow() {
-        // Get the window
-        window = NSApplication.sharedApplication().windows.last!;
-        
-        // Set the window's delegate
-        window.delegate = self;
-        
-        // Style the window's titlebar
-        window.titleVisibility = .Hidden;
-        window.styleMask |= NSFullSizeContentViewWindowMask;
-        window.titlebarAppearsTransparent = true;
-        
         // Hide and disable the pause/play button
         pausePlayButton.hidden = true;
         pausePlayButton.enabled = false;

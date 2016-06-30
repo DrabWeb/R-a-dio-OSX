@@ -140,6 +140,44 @@ class RASong {
     }
 }
 
+/// An object for referencing a search result song
+class RASearchSong: NSObject {
+    /// The artist of this song
+    var artist : String = "";
+    
+    /// The title of this song
+    var title : String = "";
+    
+    /// The ID of this song on r/a/dio
+    var id : Int = -1;
+    
+    /// Is this song requestable?
+    var requestable : Bool = true;
+    
+    /// Is this song favourited?
+    var favourited : Bool = false;
+    
+    // Blank init
+    override init() {
+        super.init();
+        
+        self.artist = "";
+        self.title = "";
+        self.id = -1;
+        self.requestable = true;
+    }
+    
+    // Init with JSON
+    init(json : JSON) {
+        super.init();
+        
+        self.artist = json["artist"].stringValue;
+        self.title = json["title"].stringValue;
+        self.id = json["id"].intValue;
+        self.requestable = json["requestable"].boolValue;
+    }
+}
+
 /// The object that passes data between RARadioUtilities and the class asking for the data
 class RARadioInfo {
     /// The current song that is playing
