@@ -683,7 +683,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="25" viewBased="YES" id="488-Bu-So9" userLabel="Songs Table View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="440" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="440" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -731,7 +731,7 @@
                                                                                 <constraint firstAttribute="height" constant="21" id="JJx-hs-e1V"/>
                                                                                 <constraint firstAttribute="width" constant="40" id="kmL-ND-QPq"/>
                                                                             </constraints>
-                                                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="RANotFavouritedIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4FY-Cj-Mp8">
+                                                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="RANotFavouritedIcon" imagePosition="only" alignment="center" alternateImage="RAFavouritedIcon" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4FY-Cj-Mp8">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
@@ -1006,6 +1006,7 @@
         <image name="NSFlowViewTemplate" width="18" height="10"/>
         <image name="NSPathTemplate" width="16" height="10"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="RAFavouritedIcon" width="256" height="256"/>
         <image name="RANotFavouritedIcon" width="256" height="256"/>
         <image name="RAPauseIcon" width="256" height="256"/>
         <image name="RAPlayIcon" width="256" height="256"/>

@@ -23,7 +23,7 @@
 		5DC72E9C1D21724200E17706 /* R_a_dioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC72E9B1D21724200E17706 /* R_a_dioUITests.swift */; };
 		5DC72EAE1D2186C800E17706 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC72EAD1D2186C800E17706 /* SwiftyJSON.swift */; };
 		5DF0E7CE1D22CAC300F1C764 /* RARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF0E7CD1D22CAC300F1C764 /* RARequestViewController.swift */; };
-		5DF9B0C51D25877D00DCF688 /* RAAlwaysActiveViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF9B0C41D25877D00DCF688 /* RAAlwaysActiveViews.swift */; };
+		5DF9B0C71D2589E200DCF688 /* RAAlwaysActivePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF9B0C61D2589E200DCF688 /* RAAlwaysActivePanel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,7 @@
 		5DC72E9D1D21724200E17706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DC72EAD1D2186C800E17706 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		5DF0E7CD1D22CAC300F1C764 /* RARequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RARequestViewController.swift; sourceTree = "<group>"; };
-		5DF9B0C41D25877D00DCF688 /* RAAlwaysActiveViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAAlwaysActiveViews.swift; sourceTree = "<group>"; };
+		5DF9B0C61D2589E200DCF688 /* RAAlwaysActivePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAAlwaysActivePanel.swift; sourceTree = "<group>"; };
 		6771E37FCD606BE17CF97E0C /* Pods_R_a_dio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_R_a_dio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7072E3A9AB04CBF6368ABF65 /* Pods_R_a_dioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_R_a_dioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D22AD193B24A0378121223 /* Pods-R-a-dio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dio/Pods-R-a-dio.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				5D14D7FC1D22EDCC00022571 /* RASongListTableViewCell.swift */,
-				5DF9B0C41D25877D00DCF688 /* RAAlwaysActiveViews.swift */,
+				5DF9B0C61D2589E200DCF688 /* RAAlwaysActivePanel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -507,9 +507,9 @@
 				5D14D7FD1D22EDCC00022571 /* RASongListTableViewCell.swift in Sources */,
 				5DB96AC01D218840009B497F /* RARadioObjects.swift in Sources */,
 				5DC72EAE1D2186C800E17706 /* SwiftyJSON.swift in Sources */,
+				5DF9B0C71D2589E200DCF688 /* RAAlwaysActivePanel.swift in Sources */,
 				5DC72E811D21724200E17706 /* RAPlayerViewController.swift in Sources */,
 				5D14D8011D23033000022571 /* RAPreferences.swift in Sources */,
-				5DF9B0C51D25877D00DCF688 /* RAAlwaysActiveViews.swift in Sources */,
 				5DC72E7F1D21724200E17706 /* AppDelegate.swift in Sources */,
 				5DB96ABD1D218807009B497F /* RARadioUtilities.swift in Sources */,
 				5DF0E7CE1D22CAC300F1C764 /* RARequestViewController.swift in Sources */,

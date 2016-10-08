@@ -18,6 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     /// The view controller for the popup that comes out of applicationStatusItem
     var applicationStatusItemPopupViewController : RAPlayerViewController? = nil;
+    
+    /// The global default preferences object
+    var preferences : RAPreferences = RAPreferences();
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
@@ -91,8 +94,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Reset applicationStatusItem's appearance so the image isnt the wrong color for the menubar
         applicationStatusItem!.button!.appearance = nil;
     }
+    
+    /// Saves the preferences
+    func savePreferences() {
+        /// The data for the preferences object
+        let data = NSKeyedArchiver.archivedDataWithRootObject(preferences);
+        
+        // Set the standard user defaults preferences key to that data
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "preferences");
+        
+        // Synchronize the data
+        NSUserDefaults.standardUserDefaults().synchronize();
+    }
+    
+    /// Loads the preferences
+    func loadPreferences() {
+        // If we have any data to load...
+        if let data = NSUserDefaults.standardUserDefaults().objectForKey("preferences") as? NSData {
+            // Set the preferences object to the loaded object
+            self.preferences = (NSKeyedUnarchiver.unarchiveObjectWithData(data) as! RAPreferences);
+            
+            print(self.preferences.favouriteSongs);
+        }
+    }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
+        // Save the preferences
+        savePreferences();
     }
 }

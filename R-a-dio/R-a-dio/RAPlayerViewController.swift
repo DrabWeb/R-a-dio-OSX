@@ -30,6 +30,9 @@ class RAPlayerViewController: NSViewController {
     @IBAction func volumeSliderChanged(sender: NSSlider) {
         // Change the volume
         radioPlayer?.volume = sender.floatValue;
+        
+        // Update the preferences volume
+        (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.volume = sender.floatValue;
     }
     
     /// The label that shows the title of the current song
@@ -181,6 +184,9 @@ class RAPlayerViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        // Load the preferences
+        (NSApplication.sharedApplication().delegate as! AppDelegate).loadPreferences();
+        
         // Style the window
         styleWindow();
         
@@ -204,6 +210,9 @@ class RAPlayerViewController: NSViewController {
         
         // Start the loading spinner
         loadingSpinner.startAnimation(self);
+        
+        // Load the previously set volume into the volume slider
+        volumeSlider.floatValue = (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.volume;
         
         // Do the initial volume update
         radioPlayer!.volume = volumeSlider.floatValue;

@@ -3,7 +3,6 @@
 //  R-a-dio
 //
 //  Created by Seth on 2016-06-28.
-//  Copyright © 2016 DrabWeb. All rights reserved.
 //
 
 import Cocoa
@@ -40,6 +39,8 @@ class RASongListTableViewCell: NSTableCellView {
         
         // Display the data
         songNameLabel.stringValue = "\(song.title) by \(song.artist)";
+        favouriteButton.state = Int(song.favourited);
+        updateFavouriteButton();
         requestButton.enabled = song.requestable;
         
         // Set the favourite button's target and action
@@ -57,15 +58,21 @@ class RASongListTableViewCell: NSTableCellView {
         representedSong!.favourited = !representedSong!.favourited;
         
         // Update the favourites button to match
+        updateFavouriteButton();
+        
+        // Call the user's favourite button pressed target and action
+        favouriteButtonTarget?.performSelector(favouriteButtonAction, withObject: representedSong!);
+    }
+    
+    /// Updates the favourite button image to match the represented song's favourited state
+    func updateFavouriteButton() {
+        // Update the favourites button to match
         if(representedSong!.favourited) {
             favouriteButton.image = NSImage(named: "RAFavouritedIcon")!;
         }
         else {
             favouriteButton.image = NSImage(named: "RANotFavouritedIcon")!;
         }
-        
-        // Call the user's favourite button pressed target and action
-        favouriteButtonTarget?.performSelector(favouriteButtonAction, withObject: representedSong!);
     }
     
     /// Called when requestButton is pressed

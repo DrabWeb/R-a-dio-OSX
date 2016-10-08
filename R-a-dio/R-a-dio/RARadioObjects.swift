@@ -157,6 +157,12 @@ class RASearchSong: NSObject {
     /// Is this song favourited?
     var favourited : Bool = false;
     
+    /// Returns if this RASearchSong is equal to another RASearchSong
+    func equals(song : RASearchSong) -> Bool {
+        // Return if the artist, title and id are the same for this song and the given song
+        return (self.artist == song.artist && self.title == song.title && self.id == song.id);
+    }
+    
     // Blank init
     override init() {
         super.init();
@@ -175,6 +181,26 @@ class RASearchSong: NSObject {
         self.title = json["title"].stringValue;
         self.id = json["id"].intValue;
         self.requestable = json["requestable"].boolValue;
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        // Encode the values
+        coder.encodeObject(self.artist, forKey: "artist");
+        coder.encodeObject(self.title, forKey: "title");
+        coder.encodeObject(self.id, forKey: "id");
+        coder.encodeObject(self.requestable, forKey: "requestable");
+        coder.encodeObject(self.favourited, forKey: "favourited");
+    }
+    
+    required convenience init(coder decoder: NSCoder) {
+        self.init();
+        
+        // Decode and load the values
+        self.artist = (decoder.decodeObjectForKey("artist") as! String?)!;
+        self.title = (decoder.decodeObjectForKey("title") as! String?)!;
+        self.id = (decoder.decodeObjectForKey("id") as! Int?)!;
+        self.requestable = (decoder.decodeObjectForKey("requestable") as! Bool?)!;
+        self.favourited = (decoder.decodeObjectForKey("favourited") as! Bool?)!;
     }
 }
 

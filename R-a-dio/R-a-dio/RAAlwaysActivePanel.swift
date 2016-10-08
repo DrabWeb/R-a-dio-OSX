@@ -1,5 +1,5 @@
 //
-//  RAAlwaysActiveViews.swift
+//  RAAlwaysActivePanel.swift
 //  R-a-dio
 //
 //  Created by Seth on 2016-06-30.
@@ -12,10 +12,3 @@ class RAAlwaysActivePanel: NSPanel {
         return true;
     }
 }
-
-class RAAlwaysActiveTextField: NSTextField {
-    override var acceptsFirstResponder : Bool {
-        return true;
-    }
-}
-

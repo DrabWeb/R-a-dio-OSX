@@ -55,7 +55,7 @@ class RARequestViewController: NSViewController {
         songsTableViewItems.removeAll();
         
         // Make the search request
-        lastSearchRequest = Alamofire.request(.GET, "https://r-a-d.io/api/search/\(query.stringByReplacingOccurrencesOfString(" ", withString: "%20"))", encoding: .JSON).responseJSON { (responseData) -> Void in
+        lastSearchRequest = Alamofire.request(.GET, "https://r-a-d.io/api/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)", encoding: .JSON).responseJSON { (responseData) -> Void in
             /// The string of JSON that will be returned when the GET request finishes
             let responseJsonString : NSString = NSString(data: responseData.data!, encoding: NSUTF8StringEncoding)!;
             
@@ -66,9 +66,35 @@ class RARequestViewController: NSViewController {
                 
                 // For every song in "data" in responseJson...
                 for(_, currentSongJson) in responseJson["data"].enumerate() {
+                    /// The new song to add to songsTableViewItems
+                    let newSearchSong : RASearchSong = RASearchSong(json: currentSongJson.1);
+                    
+                    // Set if the song is favourited
+                    newSearchSong.favourited = (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.songIsFavourited(newSearchSong);
+                    
                     // Add the current song to songsTableViewItems
-                    self.songsTableViewItems.append(RASearchSong(json: currentSongJson.1));
+                    self.songsTableViewItems.append(newSearchSong);
                 }
+                
+                /// songsTableViewItems sorted so favourites are on top
+                var sortedSongsTableViewItems : [RASearchSong] = [];
+                
+                // For every song in songsTableViewItems...
+                for(_, currentSong) in self.songsTableViewItems.enumerate() {
+                    // If the current song is favourited...
+                    if(currentSong.favourited) {
+                        // Insert the current song at the beginning of sortedSongsTableViewItems
+                        sortedSongsTableViewItems.insert(currentSong, atIndex: 0);
+                    }
+                    // If the current song isnt favourited...
+                    else {
+                        // Append the current song to the end of sortedSongsTableViewItems
+                        sortedSongsTableViewItems.append(currentSong);
+                    }
+                }
+                
+                // Set songsTableViewItems to sortedSongsTableViewItems
+                self.songsTableViewItems = sortedSongsTableViewItems;
                 
                 // Reload the songs table view
                 self.songsTableView.reloadData();
@@ -78,7 +104,16 @@ class RARequestViewController: NSViewController {
     
     /// Called when the user presses the favourite button in a row in songsTableView
     func songsTableViewItemFavouriteButtonPressed(pressedSong : RASearchSong) {
-        print("\(pressedSong.title) by \(pressedSong.artist)(\(pressedSong.id)) is favourited: \(pressedSong.favourited)");
+        // If the song is now favourited...
+        if(pressedSong.favourited) {
+            // Add the pressed song to favourites
+            (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.addSongToFavourites(pressedSong);
+        }
+        // If the song is now unfavourited...
+        else {
+            // Remove the pressed song from favourites
+            (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.removeSongFromFavourites(pressedSong);
+        }
     }
     
     /// Called when the user presses the request button in a row in songsTableView
@@ -115,7 +150,20 @@ class RARequestViewController: NSViewController {
         window = NSApplication.sharedApplication().windows.last!;
         
         // Style the visual effect views
-        backgroundVisualEffectView.material = .Dark;
+        switch((NSApplication.sharedApplication().delegate as! AppDelegate).applicationTheme) {
+            case .Dark:
+                backgroundVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
+                backgroundVisualEffectView.material = .Dark;
+                break;
+            case .Light:
+                backgroundVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+                if #available(OSX 10.11, *) {
+                    backgroundVisualEffectView.material = .MediumLight
+                } else {
+                    backgroundVisualEffectView.material = .Light;
+                };
+                break;
+        }
         
         // Style the window's titlebar
         window.titleVisibility = .Hidden;
