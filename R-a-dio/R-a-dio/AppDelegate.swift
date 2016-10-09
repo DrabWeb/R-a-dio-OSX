@@ -8,7 +8,7 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
     
     /// The theme the application is currently using
     var applicationTheme : RATheme = .Dark;
@@ -24,6 +24,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        // Set the user notification center delegate
+        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self;
+        
         // Set up applicationStatusItem
         setupApplicationStatusItem();
         
@@ -114,6 +117,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // Set the preferences object to the loaded object
             self.preferences = (NSKeyedUnarchiver.unarchiveObjectWithData(data) as! RAPreferences);
         }
+    }
+    
+    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+        return true;
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

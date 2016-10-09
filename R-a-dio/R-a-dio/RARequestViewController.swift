@@ -143,6 +143,51 @@ class RARequestViewController: NSViewController {
     func songsTableViewItemRequestButtonPressed(pressedSong : RASearchSong) {
         // Print what song we are requesting
         print("RARequestViewController: Requesting to play \(pressedSong.artist) - \(pressedSong.title)(\(pressedSong.id))");
+        
+        // Request the given song
+        Alamofire.request(.POST, "https://r-a-d.io/api/request/\(pressedSong.id)", encoding: .JSON).responseJSON { (responseData) -> Void in
+            /// The string of JSON that will be returned when the GET request finishes
+            let responseJsonString : NSString = NSString(data: responseData.data!, encoding: NSUTF8StringEncoding)!;
+            
+            // If the the response data isnt nil...
+            if let dataFromResponseJsonString = responseJsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                /// The JSON from the response string
+                let responseJson = JSON(data: dataFromResponseJsonString);
+                
+                // If the request was successful...
+                if(responseJson["success"].exists()) {
+                    // Print that the song request was successful
+                    print("RARequestViewController: Song request was successful, \(responseJson["success"].stringValue)");
+                    
+                    // Send a notification with the returned success message
+                    /// The notification to display the success message
+                    let successNotification : NSUserNotification = NSUserNotification();
+                    
+                    // Setup the success notification
+                    successNotification.title = "\(pressedSong.artist) - \(pressedSong.title)";
+                    successNotification.informativeText = responseJson["success"].stringValue;
+                    
+                    // Display the success notification
+                    NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(successNotification);
+                }
+                // If the request was unsuccessful...
+                else if(responseJson["error"].exists()) {
+                    // Print that the song request was unsuccessful
+                    print("RARequestViewController: Song request was unsuccessful, \(responseJson["error"].stringValue)");
+                    
+                    // Send a notification with the returned error message
+                    /// The notification to display the error message
+                    let errorNotification : NSUserNotification = NSUserNotification();
+                    
+                    // Setup the error notification
+                    errorNotification.title = "\(pressedSong.artist) - \(pressedSong.title)";
+                    errorNotification.informativeText = responseJson["error"].stringValue;
+                    
+                    // Display the error notification
+                    NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(errorNotification);
+                }
+            }
+        }
     }
     
     override func viewWillAppear() {
