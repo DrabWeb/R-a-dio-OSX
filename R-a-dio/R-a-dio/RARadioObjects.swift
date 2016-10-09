@@ -49,6 +49,9 @@ class RASong {
     /// The name of this song
     var name : String = "";
     
+    /// The ID of this song
+    var id : Int = -1;
+    
     /// The date this song starts/started at
     var startTime : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(0));
     
@@ -229,6 +232,9 @@ class RARadioInfo {
     
     /// The amount of listeners listening when this object was created
     var listeners : Int = -1;
+    
+    /// Is requesting currently enabled?
+    var requestingEnabled : Bool = false;
     
     /// The list of songs in the queue(capped at 5 by the API)
     var queue : [RASong] = [];

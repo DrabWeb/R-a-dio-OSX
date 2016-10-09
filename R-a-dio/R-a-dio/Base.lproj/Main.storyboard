@@ -855,7 +855,7 @@
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hTT-Ri-HO1">
-                                        <rect key="frame" x="56" y="97" width="204" height="17"/>
+                                        <rect key="frame" x="56" y="97" width="179" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="HXN-xB-AI8"/>
                                         </constraints>
@@ -906,11 +906,25 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="122" id="rkA-T5-AgI"/>
                                         </constraints>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Hanyuu" id="9wn-a9-Tob"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="Hanyuu" id="9wn-a9-Tob"/>
                                     </imageView>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="fBK-Uz-ZUo" userLabel="Loading Spinner">
                                         <rect key="frame" x="129" y="45" width="32" height="32"/>
                                     </progressIndicator>
+                                    <button toolTip="Favourite" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VTC-FY-jMW" userLabel="Favourite Button">
+                                        <rect key="frame" x="241" y="97" width="17" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="17" id="AIy-uF-byE"/>
+                                            <constraint firstAttribute="height" constant="17" id="Dtp-rT-Ywh"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="RANotFavouritedIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Mrl-cg-Cne">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="favouriteButtonPressed:" target="XfG-lQ-9wD" id="nBo-GZ-1CR"/>
+                                        </connections>
+                                    </button>
                                     <button toolTip="Request a song" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-9X-Z0O" userLabel="Request Button">
                                         <rect key="frame" x="266" y="97" width="17" height="17"/>
                                         <constraints>
@@ -928,6 +942,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="x8M-u6-xYK" secondAttribute="bottom" id="2SF-DF-BLK"/>
+                                    <constraint firstItem="VTC-FY-jMW" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" constant="8" id="9jv-iU-dFS"/>
                                     <constraint firstItem="fBK-Uz-ZUo" firstAttribute="centerY" secondItem="7u7-Hs-aHA" secondAttribute="centerY" id="CJa-wi-vjc"/>
                                     <constraint firstItem="nW2-4o-b0b" firstAttribute="leading" secondItem="pAE-Af-ffp" secondAttribute="trailing" constant="8" id="NKf-oF-kpE"/>
                                     <constraint firstItem="x8M-u6-xYK" firstAttribute="leading" secondItem="nW2-4o-b0b" secondAttribute="trailing" constant="8" id="OVp-FL-oPq"/>
@@ -936,15 +951,16 @@
                                     <constraint firstItem="4ZK-yH-Fih" firstAttribute="centerY" secondItem="7u7-Hs-aHA" secondAttribute="centerY" id="R9x-Al-AaD"/>
                                     <constraint firstItem="x8M-u6-xYK" firstAttribute="leading" secondItem="0nt-9X-Z0O" secondAttribute="trailing" constant="8" id="REI-Yq-CN3"/>
                                     <constraint firstItem="p1Q-Gc-lkO" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" constant="8" id="T3t-x1-lCL"/>
+                                    <constraint firstItem="0nt-9X-Z0O" firstAttribute="leading" secondItem="VTC-FY-jMW" secondAttribute="trailing" constant="8" id="TFY-ut-7V5"/>
                                     <constraint firstItem="fBK-Uz-ZUo" firstAttribute="centerX" secondItem="7u7-Hs-aHA" secondAttribute="centerX" constant="-61.5" id="TSF-qs-HKe"/>
                                     <constraint firstItem="4ZK-yH-Fih" firstAttribute="centerX" secondItem="7u7-Hs-aHA" secondAttribute="centerX" constant="-60.5" id="VBe-uN-g01"/>
                                     <constraint firstItem="ZvZ-OC-srA" firstAttribute="leading" secondItem="p1Q-Gc-lkO" secondAttribute="trailing" constant="8" id="Vrn-qh-Rnw"/>
                                     <constraint firstAttribute="bottom" secondItem="pAE-Af-ffp" secondAttribute="bottom" constant="4" id="X7o-ON-3S2"/>
                                     <constraint firstAttribute="bottom" secondItem="ape-5f-kMn" secondAttribute="bottom" constant="5" id="Xr9-pE-QYb"/>
-                                    <constraint firstItem="0nt-9X-Z0O" firstAttribute="leading" secondItem="hTT-Ri-HO1" secondAttribute="trailing" constant="8" id="XxS-Db-whu"/>
                                     <constraint firstItem="p1Q-Gc-lkO" firstAttribute="leading" secondItem="7u7-Hs-aHA" secondAttribute="leading" constant="8" id="ZVl-J5-Zne"/>
                                     <constraint firstItem="pAE-Af-ffp" firstAttribute="leading" secondItem="ape-5f-kMn" secondAttribute="trailing" constant="8" id="crc-hY-VFD"/>
                                     <constraint firstItem="x8M-u6-xYK" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" id="ikB-Eh-97w"/>
+                                    <constraint firstItem="VTC-FY-jMW" firstAttribute="leading" secondItem="hTT-Ri-HO1" secondAttribute="trailing" constant="8" id="o4D-uQ-O4T"/>
                                     <constraint firstAttribute="bottom" secondItem="nW2-4o-b0b" secondAttribute="bottom" constant="5" id="q9n-qP-Wtt"/>
                                     <constraint firstItem="0nt-9X-Z0O" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" constant="8" id="s1W-Ci-8Et"/>
                                     <constraint firstItem="hTT-Ri-HO1" firstAttribute="leading" secondItem="ZvZ-OC-srA" secondAttribute="trailing" constant="8" id="sBs-mF-nzD"/>
@@ -988,6 +1004,7 @@
                         <outlet property="currentSongDurationLabel" destination="nW2-4o-b0b" id="6DW-ub-n7u"/>
                         <outlet property="currentSongPositionLabel" destination="ape-5f-kMn" id="CGW-CA-mLN"/>
                         <outlet property="currentSongProgressProgressBar" destination="pAE-Af-ffp" id="l24-Wt-kdQ"/>
+                        <outlet property="favouriteButton" destination="VTC-FY-jMW" id="7Zj-FQ-smV"/>
                         <outlet property="loadingSpinner" destination="fBK-Uz-ZUo" id="Byc-FQ-e4l"/>
                         <outlet property="pausePlayButton" destination="4ZK-yH-Fih" id="nSF-3Y-HJ9"/>
                         <outlet property="requestButton" destination="0nt-9X-Z0O" id="E09-Ug-Evn"/>

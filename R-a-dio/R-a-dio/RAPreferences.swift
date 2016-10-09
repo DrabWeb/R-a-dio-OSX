@@ -38,7 +38,7 @@ class RAPreferences: NSObject {
     /// Adds the given RASearchSong to favouriteSongs
     func addSongToFavourites(song : RASearchSong) {
         // Print what song we are adding to favourites
-        print("RAPreferences: Adding \(song.title) by \(song.artist)(\(song.id)) to favourites");
+        print("RAPreferences: Adding \(song.artist) - \(song.title)(\(song.id)) to favourites");
         
         // Add the given song to favouriteSongs
         favouriteSongs.append(song);
@@ -47,12 +47,23 @@ class RAPreferences: NSObject {
     /// Removes the given RASearchSong from favouriteSongs
     func removeSongFromFavourites(song : RASearchSong) {
         // Print what song we are removing from favourites
-        print("RAPreferences: Removing \(song.title) by \(song.artist)(\(song.id)) from favourites");
+        print("RAPreferences: Removing \(song.artist) - \(song.title)(\(song.id)) from favourites");
         
         // Remove the given song from favouriteSongs
-        let favouriteSongsNSArray : NSMutableArray = NSMutableArray(array: favouriteSongs);
-        favouriteSongsNSArray.removeObject(song);
-        favouriteSongs = Array(favouriteSongsNSArray) as! [RASearchSong];
+        /// favouriteSongs without song
+        var newFavouriteSongs : [RASearchSong] = [];
+        
+        // For every item in favouriteSongs...
+        for(_, currentSong) in favouriteSongs.enumerate() {
+            // If the current song's ID isnt equal to the given song's ID...
+            if(currentSong.id != song.id) {
+                // Add the current song to newFavouriteSongs
+                newFavouriteSongs.append(currentSong);
+            }
+        }
+        
+        // Set favouriteSongs to newFavouriteSongs
+        favouriteSongs = newFavouriteSongs;
     }
     
     func encodeWithCoder(coder: NSCoder) {

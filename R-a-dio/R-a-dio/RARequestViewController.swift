@@ -41,6 +41,9 @@ class RARequestViewController: NSViewController {
         // Do view setup here.
         // Style the window
         styleWindow();
+        
+        // Display all the user's favourites
+        displayFavourites();
     }
     
     /// The last request made for getting search results
@@ -54,52 +57,72 @@ class RARequestViewController: NSViewController {
         // Clear songsTableViewItems
         songsTableViewItems.removeAll();
         
-        // Make the search request
-        lastSearchRequest = Alamofire.request(.GET, "https://r-a-d.io/api/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)", encoding: .JSON).responseJSON { (responseData) -> Void in
-            /// The string of JSON that will be returned when the GET request finishes
-            let responseJsonString : NSString = NSString(data: responseData.data!, encoding: NSUTF8StringEncoding)!;
-            
-            // If the the response data isnt nil...
-            if let dataFromResponseJsonString = responseJsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-                /// The JSON from the response string
-                let responseJson = JSON(data: dataFromResponseJsonString);
+        // If the search query isnt blank...
+        if(query != "") {
+            // Make the search request
+            lastSearchRequest = Alamofire.request(.GET, "https://r-a-d.io/api/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)", encoding: .JSON).responseJSON { (responseData) -> Void in
+                /// The string of JSON that will be returned when the GET request finishes
+                let responseJsonString : NSString = NSString(data: responseData.data!, encoding: NSUTF8StringEncoding)!;
                 
-                // For every song in "data" in responseJson...
-                for(_, currentSongJson) in responseJson["data"].enumerate() {
-                    /// The new song to add to songsTableViewItems
-                    let newSearchSong : RASearchSong = RASearchSong(json: currentSongJson.1);
+                // If the the response data isnt nil...
+                if let dataFromResponseJsonString = responseJsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                    /// The JSON from the response string
+                    let responseJson = JSON(data: dataFromResponseJsonString);
                     
-                    // Set if the song is favourited
-                    newSearchSong.favourited = (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.songIsFavourited(newSearchSong);
+                    // For every song in "data" in responseJson...
+                    for(_, currentSongJson) in responseJson["data"].enumerate() {
+                        /// The new song to add to songsTableViewItems
+                        let newSearchSong : RASearchSong = RASearchSong(json: currentSongJson.1);
+                        
+                        // Set if the song is favourited
+                        newSearchSong.favourited = (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.songIsFavourited(newSearchSong);
+                        
+                        // Add the current song to songsTableViewItems
+                        self.songsTableViewItems.append(newSearchSong);
+                    }
                     
-                    // Add the current song to songsTableViewItems
-                    self.songsTableViewItems.append(newSearchSong);
-                }
-                
-                /// songsTableViewItems sorted so favourites are on top
-                var sortedSongsTableViewItems : [RASearchSong] = [];
-                
-                // For every song in songsTableViewItems...
-                for(_, currentSong) in self.songsTableViewItems.enumerate() {
-                    // If the current song is favourited...
-                    if(currentSong.favourited) {
-                        // Insert the current song at the beginning of sortedSongsTableViewItems
-                        sortedSongsTableViewItems.insert(currentSong, atIndex: 0);
+                    /// songsTableViewItems sorted so favourites are on top
+                    var sortedSongsTableViewItems : [RASearchSong] = [];
+                    
+                    // For every song in songsTableViewItems...
+                    for(_, currentSong) in self.songsTableViewItems.enumerate() {
+                        // If the current song is favourited...
+                        if(currentSong.favourited) {
+                            // Insert the current song at the beginning of sortedSongsTableViewItems
+                            sortedSongsTableViewItems.insert(currentSong, atIndex: 0);
+                        }
+                            // If the current song isnt favourited...
+                        else {
+                            // Append the current song to the end of sortedSongsTableViewItems
+                            sortedSongsTableViewItems.append(currentSong);
+                        }
                     }
-                    // If the current song isnt favourited...
-                    else {
-                        // Append the current song to the end of sortedSongsTableViewItems
-                        sortedSongsTableViewItems.append(currentSong);
-                    }
+                    
+                    // Set songsTableViewItems to sortedSongsTableViewItems
+                    self.songsTableViewItems = sortedSongsTableViewItems;
+                    
+                    // Reload the songs table view
+                    self.songsTableView.reloadData();
                 }
-                
-                // Set songsTableViewItems to sortedSongsTableViewItems
-                self.songsTableViewItems = sortedSongsTableViewItems;
-                
-                // Reload the songs table view
-                self.songsTableView.reloadData();
             }
         }
+        // If the search query is blank...
+        else {
+            // Display all the user's favourites
+            displayFavourites();
+        }
+    }
+    
+    /// Displays all the user's favourites in songsTableView
+    func displayFavourites() {
+        // Print that we are displaying favourites
+        print("RARequestViewController: Displaying favourites");
+        
+        // Set songsTableViewItems to favouriteSongs
+        self.songsTableViewItems = (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.favouriteSongs;
+        
+        // Reload songsTableView
+        songsTableView.reloadData();
     }
     
     /// Called when the user presses the favourite button in a row in songsTableView
@@ -118,7 +141,8 @@ class RARequestViewController: NSViewController {
     
     /// Called when the user presses the request button in a row in songsTableView
     func songsTableViewItemRequestButtonPressed(pressedSong : RASearchSong) {
-        print("Requested to play \(pressedSong.title) by \(pressedSong.artist)(\(pressedSong.id))");
+        // Print what song we are requesting
+        print("RARequestViewController: Requesting to play \(pressedSong.artist) - \(pressedSong.title)(\(pressedSong.id))");
     }
     
     override func viewWillAppear() {

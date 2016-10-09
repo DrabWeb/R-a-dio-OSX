@@ -38,7 +38,7 @@ class RASongListTableViewCell: NSTableCellView {
         representedSong = song;
         
         // Display the data
-        songNameLabel.stringValue = "\(song.title) by \(song.artist)";
+        songNameLabel.stringValue = "\(song.artist) - \(song.title)";
         favouriteButton.state = Int(song.favourited);
         updateFavouriteButton();
         requestButton.enabled = song.requestable;

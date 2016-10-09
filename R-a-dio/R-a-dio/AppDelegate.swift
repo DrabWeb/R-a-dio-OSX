@@ -113,8 +113,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let data = NSUserDefaults.standardUserDefaults().objectForKey("preferences") as? NSData {
             // Set the preferences object to the loaded object
             self.preferences = (NSKeyedUnarchiver.unarchiveObjectWithData(data) as! RAPreferences);
-            
-            print(self.preferences.favouriteSongs);
         }
     }
 

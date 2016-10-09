@@ -8,6 +8,7 @@
 import Cocoa
 import AVKit
 import AVFoundation
+import Alamofire
 
 class RAPlayerViewController: NSViewController {
     
@@ -78,6 +79,57 @@ class RAPlayerViewController: NSViewController {
         
         // Show the queued songs menu at the queued songs button's position
         queueMenu.popUpMenuPositioningItem(nil, atLocation: NSPoint(x: 0, y: 0), inView: sender);
+    }
+    
+    /// The button for favouriting/unfavouriting the current playing song
+    @IBOutlet var favouriteButton: NSButton!
+    
+    /// When favouriteButton is pressed...
+    @IBAction func favouriteButtonPressed(sender: NSButton) {
+        // Toggle the state
+        favouriteButton.state == Int(!Bool(favouriteButton.state));
+        
+        // If the favourited button is now on...
+        if(Bool(favouriteButton.state)) {
+            // Favourite the current playing song
+            favouriteCurrentSong();
+        }
+        // If the favourited button is now off...
+        else {
+            // Unfavourite the current playing song
+            unfavouriteCurrentSong();
+        }
+        
+        // Update the favourite button
+        updateFavouriteButton();
+    }
+    
+    /// Updates favouriteButton to match it's state
+    func updateFavouriteButton() {
+        // If the favourite button's state is on...
+        if(favouriteButton.state == NSOnState) {
+            // Set the image
+            favouriteButton.image = NSImage(named: "RAFavouritedIcon")!;
+        }
+        // If the favourite button's state is off...
+        else if(favouriteButton.state == NSOffState) {
+            // Set the image
+            favouriteButton.image = NSImage(named: "RANotFavouritedIcon")!;
+        }
+    }
+    
+    /// Updates favouriteButton to match if the current playing song is favourited
+    func updateFavouriteButtonState() {
+        // Display if the song is favourited
+        /// The current song as an RASearchSong
+        let currentSongAsSearchSong : RASearchSong = RASearchSong();
+        
+        // Set currentSongAsSearchSong's ID to the current song's ID
+        currentSongAsSearchSong.id = currentRadioInfo.currentSong.id;
+        
+        // Update the favourited button to match
+        favouriteButton.state = Int((NSApplication.sharedApplication().delegate as! AppDelegate).preferences.songIsFavourited(currentSongAsSearchSong));
+        updateFavouriteButton();
     }
     
     /// The button that the user can press to request a song to be played on r/a/dio
@@ -163,10 +215,14 @@ class RAPlayerViewController: NSViewController {
         /// The song request menu item
         let songRequestMenuItem : NSMenuItem = NSMenuItem(title: "Request A Song", action: requestButton.action, keyEquivalent: "r");
         
+        // Enable/disable songRequestMenuItem based on if requests are enabled
+        menu.autoenablesItems = false;
+        songRequestMenuItem.enabled = currentRadioInfo.requestingEnabled;
+        
         // Set the song request menu item's target
         songRequestMenuItem.target = requestButton.target;
         
-        // Add the request song menu item
+        // Add the song request menu item
         menu.addItem(songRequestMenuItem);
         
         // Add the quit menu item
@@ -186,6 +242,9 @@ class RAPlayerViewController: NSViewController {
         // Do view setup here.
         // Load the preferences
         (NSApplication.sharedApplication().delegate as! AppDelegate).loadPreferences();
+        
+        // Allow the DJ image view to animate
+        currentDjImageView.canDrawSubviewsIntoLayer = true;
         
         // Style the window
         styleWindow();
@@ -272,6 +331,12 @@ class RAPlayerViewController: NSViewController {
         // Set the title label to the current song's name
         songTitleTextField.stringValue = radioInfo.currentSong.name;
         
+        // Display if the song is favourited
+        updateFavouriteButtonState();
+        
+        // Enable/disable the request button
+        requestButton.enabled = radioInfo.requestingEnabled;
+        
         // Set currentSongPositionSeconds
         currentSongPositionSeconds = Int(radioInfo.currentSongPosition.timeIntervalSince1970);
         
@@ -282,10 +347,51 @@ class RAPlayerViewController: NSViewController {
         }
         
         // Set the DJ artwork image view's tooltip
-        currentDjImageView.toolTip = "\(radioInfo.currentDj.name)\n\(radioInfo.listeners) listeners";
+        currentDjImageView.toolTip = "\(radioInfo.currentDj.name), \(radioInfo.listeners) listeners";
         
         // Set lastDj
         lastDj = currentRadioInfo.currentDj;
+    }
+    
+    /// Favourites the current playing song
+    func favouriteCurrentSong() {
+        Alamofire.request(.GET, "https://r-a-d.io/api/search/\(currentRadioInfo.currentSong.id)", encoding: .JSON).responseJSON { (responseData) -> Void in
+            /// The string of JSON that will be returned when the GET request finishes
+            let responseJsonString : NSString = NSString(data: responseData.data!, encoding: NSUTF8StringEncoding)!;
+            
+            // If the the response data isnt nil...
+            if let dataFromResponseJsonString = responseJsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                /// The JSON from the response string
+                let responseJson = JSON(data: dataFromResponseJsonString);
+                
+                /// The RASearchSong from the returned JSON
+                let returnedSong : RASearchSong = RASearchSong(json: responseJson["data"][0]);
+                
+                // Add returnedSong to the favourites
+                (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.addSongToFavourites(returnedSong);
+                
+                // Update the favourites button state and image
+                self.favouriteButton.state = NSOnState;
+                self.updateFavouriteButton();
+            }
+        }
+    }
+    
+    /// Unfavourites the current playing song
+    func unfavouriteCurrentSong() {
+        // Unfavourite the current song
+        /// The current song as an RASearchSong
+        let currentSongAsSearchSong : RASearchSong = RASearchSong();
+        
+        // Set currentSongAsSearchSong's ID to the current song's ID
+        currentSongAsSearchSong.id = currentRadioInfo.currentSong.id;
+        
+        // Remove currentSongAsSearchSong from the favourites
+        (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.removeSongFromFavourites(currentSongAsSearchSong);
+        
+        // Update the favourites button state and image
+        favouriteButton.state = NSOffState;
+        updateFavouriteButton();
     }
     
     /// Updates the position/duration labels and the playing progress bar. Called every second
