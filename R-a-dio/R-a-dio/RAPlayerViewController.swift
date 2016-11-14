@@ -28,69 +28,69 @@ class RAPlayerViewController: NSViewController {
     @IBOutlet weak var volumeSlider: NSSlider!
     
     /// When the user changes volumeSlider's value...
-    @IBAction func volumeSliderChanged(sender: NSSlider) {
+    @IBAction func volumeSliderChanged(_ sender: NSSlider) {
         // Change the volume
         radioPlayer?.volume = sender.floatValue;
         
         // Update the preferences volume
-        (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.volume = sender.floatValue;
+        (NSApplication.shared().delegate as! AppDelegate).preferences.volume = sender.floatValue;
     }
     
     /// The label that shows the title of the current song
     @IBOutlet var songTitleTextField: NSTextField!
     
     /// When the user presses the last played button...
-    @IBAction func lastPlayedButtonPressed(sender: NSButton) {
+    @IBAction func lastPlayedButtonPressed(_ sender: NSButton) {
         /// The menu that will show the last played songs
         let lastPlayedMenu : NSMenu = NSMenu();
         
         // Add the "Last Played" header item
-        lastPlayedMenu.addItemWithTitle("Last Played", action: Selector(""), keyEquivalent: "");
+        lastPlayedMenu.addItem(withTitle: "Last Played", action: Selector(""), keyEquivalent: "");
         
         // Add a separator
-        lastPlayedMenu.addItem(NSMenuItem.separatorItem());
+        lastPlayedMenu.addItem(NSMenuItem.separator());
         
         // For every song in the last played songs in currentRadioInfo...
-        for(_, currentLastPlayedSong) in currentRadioInfo.lastPlayed.enumerate() {
+        for(_, currentLastPlayedSong) in currentRadioInfo.lastPlayed.enumerated() {
             // Add an item with the current song's title with how long ago it played to lastPlayedMenu
-            lastPlayedMenu.addItemWithTitle("\(currentLastPlayedSong.name) - \(currentLastPlayedSong.startTimeFromNow) ago", action: Selector(""), keyEquivalent: "");
+            lastPlayedMenu.addItem(withTitle: "\(currentLastPlayedSong.name) - \(currentLastPlayedSong.startTimeFromNow) ago", action: Selector(""), keyEquivalent: "");
         }
         
         // Show the last played menu at the last played button's position
-        lastPlayedMenu.popUpMenuPositioningItem(nil, atLocation: NSPoint(x: 0, y: 0), inView: sender);
+        lastPlayedMenu.popUp(positioning: nil, at: NSPoint(x: 0, y: 0), in: sender);
     }
     
     /// When the user presses the queue button...
-    @IBAction func queueButtonPressed(sender: NSButton) {
+    @IBAction func queueButtonPressed(_ sender: NSButton) {
         /// The menu that will show the queued songs
         let queueMenu : NSMenu = NSMenu();
         
         // Add the "Queue" header item
-        queueMenu.addItemWithTitle("Queue", action: Selector(""), keyEquivalent: "");
+        queueMenu.addItem(withTitle: "Queue", action: Selector(""), keyEquivalent: "");
         
         // Add a separator
-        queueMenu.addItem(NSMenuItem.separatorItem());
+        queueMenu.addItem(NSMenuItem.separator());
         
         // For every song in the queued songs in currentRadioInfo...
-        for(_, currentQueuedSong) in currentRadioInfo.queue.enumerate() {
+        for(_, currentQueuedSong) in currentRadioInfo.queue.enumerated() {
             // Add an item with the current song's title with it's start time to queueMenu
-            queueMenu.addItemWithTitle("\(currentQueuedSong.name) - in \(currentQueuedSong.startTimeFromNow)", action: Selector(""), keyEquivalent: "");
+            queueMenu.addItem(withTitle: "\(currentQueuedSong.name) - in \(currentQueuedSong.startTimeFromNow)", action: Selector(""), keyEquivalent: "");
         }
         
         // Show the queued songs menu at the queued songs button's position
-        queueMenu.popUpMenuPositioningItem(nil, atLocation: NSPoint(x: 0, y: 0), inView: sender);
+        queueMenu.popUp(positioning: nil, at: NSPoint(x: 0, y: 0), in: sender);
     }
     
     /// The button for favouriting/unfavouriting the current playing song
     @IBOutlet var favouriteButton: NSButton!
     
     /// When favouriteButton is pressed...
-    @IBAction func favouriteButtonPressed(sender: NSButton) {
+    @IBAction func favouriteButtonPressed(_ sender: NSButton) {
         // Toggle the state
-        favouriteButton.state == Int(!Bool(favouriteButton.state));
+        favouriteButton.state == Int.fromBool(bool: !Bool(favouriteButton.state as NSNumber));
         
         // If the favourited button is now on...
-        if(Bool(favouriteButton.state)) {
+        if(Bool(favouriteButton.state as NSNumber)) {
             // Favourite the current playing song
             favouriteCurrentSong();
         }
@@ -128,7 +128,7 @@ class RAPlayerViewController: NSViewController {
         currentSongAsSearchSong.id = currentRadioInfo.currentSong.id;
         
         // Update the favourited button to match
-        favouriteButton.state = Int((NSApplication.sharedApplication().delegate as! AppDelegate).preferences.songIsFavourited(currentSongAsSearchSong));
+        favouriteButton.state = Int.fromBool(bool: (NSApplication.shared().delegate as! AppDelegate).preferences.songIsFavourited(currentSongAsSearchSong));
         updateFavouriteButton();
     }
     
@@ -139,11 +139,11 @@ class RAPlayerViewController: NSViewController {
     @IBOutlet var pausePlayButton: NSButton!
     
     /// When the user presses pausePlayButton...
-    @IBAction func pausePlayButtonPressed(sender: NSButton) {
+    @IBAction func pausePlayButtonPressed(_ sender: NSButton) {
         // If the r/a/dio player is playing...
-        if(!radioPlayer!.muted) {
+        if(!radioPlayer!.isMuted) {
             // "Pause" it(Mute it)
-            radioPlayer!.muted = true;
+            radioPlayer!.isMuted = true;
             
             // Update pausePlayButton
             pausePlayButton.image = NSImage(named: "RAPlayIcon");
@@ -151,7 +151,7 @@ class RAPlayerViewController: NSViewController {
         // If the r/a/dio player is paused...
         else {
             // "Play" it(Un-mute it)
-            radioPlayer!.muted = false;
+            radioPlayer!.isMuted = false;
             
             // Update pausePlayButton
             pausePlayButton.image = NSImage(named: "RAPauseIcon");
@@ -171,7 +171,7 @@ class RAPlayerViewController: NSViewController {
     @IBOutlet var currentDjImageView: DKAsyncImageView!
     
     /// The current theme for this player
-    var currentTheme : RATheme = .Light;
+    var currentTheme : RATheme = .light;
     
     /// The last retrieved RARadioInfo
     var currentRadioInfo : RARadioInfo = RARadioInfo();
@@ -188,13 +188,13 @@ class RAPlayerViewController: NSViewController {
     /// The display string for currentSongPositionSeconds, in the format "MM:SS"
     var currentSongPositionSecondsString : String {
         /// The date from currentSongPositionSeconds
-        let currentSongPositionSecondsDate : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(currentSongPositionSeconds));
+        let currentSongPositionSecondsDate : Date = Date(timeIntervalSince1970: TimeInterval(currentSongPositionSeconds));
         
         /// The date components of currentSongPositionSecondsDate
-        let currentSongPositionSecondsDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: currentSongPositionSecondsDate);
+        let currentSongPositionSecondsDateComponents : DateComponents = (Calendar.current as NSCalendar).components([.minute, .second], from: currentSongPositionSecondsDate);
         
         /// The display string for the seconds value
-        var secondsString : String = String(currentSongPositionSecondsDateComponents.second);
+        var secondsString : String = String(describing: currentSongPositionSecondsDateComponents.second!);
         
         // If there is only one character in secondsString...
         if(secondsString.characters.count == 1) {
@@ -203,11 +203,11 @@ class RAPlayerViewController: NSViewController {
         }
         
         // Return the position string
-        return "\(currentSongPositionSecondsDateComponents.minute):\(secondsString)";
+        return "\(currentSongPositionSecondsDateComponents.minute!):\(secondsString)";
     }
     
-    override func rightMouseDown(theEvent: NSEvent) {
-        super.rightMouseDown(theEvent);
+    override func rightMouseDown(with theEvent: NSEvent) {
+        super.rightMouseDown(with: theEvent);
         
         /// The context menu to show
         let menu : NSMenu = NSMenu();
@@ -217,7 +217,7 @@ class RAPlayerViewController: NSViewController {
         
         // Enable/disable songRequestMenuItem based on if requests are enabled
         menu.autoenablesItems = false;
-        songRequestMenuItem.enabled = currentRadioInfo.requestingEnabled;
+        songRequestMenuItem.isEnabled = currentRadioInfo.requestingEnabled;
         
         // Set the song request menu item's target
         songRequestMenuItem.target = requestButton.target;
@@ -226,22 +226,22 @@ class RAPlayerViewController: NSViewController {
         menu.addItem(songRequestMenuItem);
         
         // Add the quit menu item
-        menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit"), keyEquivalent: "q"));
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(RAPlayerViewController.quit), keyEquivalent: "q"));
         
         // Show the context menu
-        NSMenu.popUpContextMenu(menu, withEvent: theEvent, forView: self.backgroundVisualEffectView);
+        NSMenu.popUpContextMenu(menu, with: theEvent, for: self.backgroundVisualEffectView);
     }
     
     /// Called when the user right clicks and selects "Quit", quits the application
     func quit() {
-        NSApplication.sharedApplication().terminate(nil);
+        NSApplication.shared().terminate(nil);
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         // Load the preferences
-        (NSApplication.sharedApplication().delegate as! AppDelegate).loadPreferences();
+        (NSApplication.shared().delegate as! AppDelegate).loadPreferences();
         
         // Allow the DJ image view to animate
         currentDjImageView.canDrawSubviewsIntoLayer = true;
@@ -256,45 +256,45 @@ class RAPlayerViewController: NSViewController {
         reloadRadioInfo();
         
         // Start the updatePositionDurationProgressViews timer
-        NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(1), target: self, selector: Selector("updatePositionDurationProgressViews"), userInfo: nil, repeats: true);
+        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(RAPlayerViewController.updatePositionDurationProgressViews), userInfo: nil, repeats: true);
         
         // Start the reload timer
-        NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(10), target: self, selector: Selector("reloadRadioInfoLoop"), userInfo: nil, repeats: true);
+        Timer.scheduledTimer(timeInterval: TimeInterval(10), target: self, selector: #selector(RAPlayerViewController.reloadRadioInfoLoop), userInfo: nil, repeats: true);
         
         // Create radioPlayer
-        radioPlayer = AVPlayer(URL: NSURL(string: "https://stream.r-a-d.io/main.mp3")!);
+        radioPlayer = AVPlayer(url: URL(string: "https://stream.r-a-d.io/main.mp3")!);
         
         // Observe radioPlayer's status so we can play it when it loads
-        radioPlayer!.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.New, context: nil);
+        radioPlayer!.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil);
         
         // Start the loading spinner
         loadingSpinner.startAnimation(self);
         
         // Load the previously set volume into the volume slider
-        volumeSlider.floatValue = (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.volume;
+        volumeSlider.floatValue = (NSApplication.shared().delegate as! AppDelegate).preferences.volume;
         
         // Do the initial volume update
         radioPlayer!.volume = volumeSlider.floatValue;
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         // If the key path is the one for the the r/a/dio player status...
         if(keyPath! == "status") {
             // If the r/a/dio player is ready to play...
-            if(radioPlayer!.status == AVPlayerStatus.ReadyToPlay) {
+            if(radioPlayer!.status == AVPlayerStatus.readyToPlay) {
                 // Start playing the r/a/dio player
                 radioPlayer!.play();
                 
                 // Hide and stop the loading spinner
-                loadingSpinner.hidden = true;
+                loadingSpinner.isHidden = true;
                 loadingSpinner.stopAnimation(self);
                 
                 // Show and enable the pause/play button
-                pausePlayButton.hidden = false;
-                pausePlayButton.enabled = true;
+                pausePlayButton.isHidden = false;
+                pausePlayButton.isEnabled = true;
             }
             // If the r/a/dio player failed...
-            else if(radioPlayer!.status == AVPlayerStatus.Failed) {
+            else if(radioPlayer!.status == AVPlayerStatus.failed) {
                 // Print that the r/a/dio player failed to load
                 print("RAPlayerViewController: Failed to load r/a/dio player");
             }
@@ -320,7 +320,7 @@ class RAPlayerViewController: NSViewController {
     }
     
     /// Displays the data from the given RARadioInfo
-    func displayRadioInfo(radioInfo : RARadioInfo) {
+    func displayRadioInfo(_ radioInfo : RARadioInfo) {
         // Print what we are displaying
         print("RAPlayerViewController: Displaying radio info");
         
@@ -335,7 +335,7 @@ class RAPlayerViewController: NSViewController {
         updateFavouriteButtonState();
         
         // Enable/disable the request button
-        requestButton.enabled = radioInfo.requestingEnabled;
+        requestButton.isEnabled = radioInfo.requestingEnabled;
         
         // Set currentSongPositionSeconds
         currentSongPositionSeconds = Int(radioInfo.currentSongPosition.timeIntervalSince1970);
@@ -355,12 +355,12 @@ class RAPlayerViewController: NSViewController {
     
     /// Favourites the current playing song
     func favouriteCurrentSong() {
-        Alamofire.request(.GET, "https://r-a-d.io/api/search/\(currentRadioInfo.currentSong.id)", encoding: .JSON).responseJSON { (responseData) -> Void in
+        Alamofire.request("https://r-a-d.io/api/search/\(currentRadioInfo.currentSong.id)").responseJSON { (responseData) -> Void in
             /// The string of JSON that will be returned when the GET request finishes
-            let responseJsonString : NSString = NSString(data: responseData.data!, encoding: NSUTF8StringEncoding)!;
+            let responseJsonString : NSString = NSString(data: responseData.data!, encoding: String.Encoding.utf8.rawValue)!;
             
             // If the the response data isnt nil...
-            if let dataFromResponseJsonString = responseJsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+            if let dataFromResponseJsonString = responseJsonString.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false) {
                 /// The JSON from the response string
                 let responseJson = JSON(data: dataFromResponseJsonString);
                 
@@ -368,7 +368,7 @@ class RAPlayerViewController: NSViewController {
                 let returnedSong : RASearchSong = RASearchSong(json: responseJson["data"][0]);
                 
                 // Add returnedSong to the favourites
-                (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.addSongToFavourites(returnedSong);
+                (NSApplication.shared().delegate as! AppDelegate).preferences.addSongToFavourites(returnedSong);
                 
                 // Update the favourites button state and image
                 self.favouriteButton.state = NSOnState;
@@ -387,7 +387,7 @@ class RAPlayerViewController: NSViewController {
         currentSongAsSearchSong.id = currentRadioInfo.currentSong.id;
         
         // Remove currentSongAsSearchSong from the favourites
-        (NSApplication.sharedApplication().delegate as! AppDelegate).preferences.removeSongFromFavourites(currentSongAsSearchSong);
+        (NSApplication.shared().delegate as! AppDelegate).preferences.removeSongFromFavourites(currentSongAsSearchSong);
         
         // Update the favourites button state and image
         favouriteButton.state = NSOffState;
@@ -422,24 +422,24 @@ class RAPlayerViewController: NSViewController {
     /// Re-applies currentTheme
     func reapplyTheme() {
         // If the theme is dark...
-        if(currentTheme == .Dark) {
+        if(currentTheme == .dark) {
             // Style the visual effect views
-            backgroundVisualEffectView.material = .Dark;
-            volumeBarVisualEffectView.material = .Titlebar;
+            backgroundVisualEffectView.material = .dark;
+            volumeBarVisualEffectView.material = .titlebar;
             
             backgroundVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
             volumeBarVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
         }
         // If the theme is light...
-        else if(currentTheme == .Light) {
+        else if(currentTheme == .light) {
             // Style the visual effect views
             if #available(OSX 10.11, *) {
-                backgroundVisualEffectView.material = .MediumLight
+                backgroundVisualEffectView.material = .mediumLight
             } else {
-                backgroundVisualEffectView.material = .Light;
+                backgroundVisualEffectView.material = .light;
             };
             
-            volumeBarVisualEffectView.material = .Light;
+            volumeBarVisualEffectView.material = .light;
             
             backgroundVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
             volumeBarVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
@@ -449,16 +449,16 @@ class RAPlayerViewController: NSViewController {
     /// Styles the window
     func styleWindow() {
         // Hide and disable the pause/play button
-        pausePlayButton.hidden = true;
-        pausePlayButton.enabled = false;
+        pausePlayButton.isHidden = true;
+        pausePlayButton.isEnabled = false;
     }
 }
 
 /// The different themes the application can have
 enum RATheme {
     /// The dark theme
-    case Dark
+    case dark
     
     /// The light theme
-    case Light
+    case light
 }

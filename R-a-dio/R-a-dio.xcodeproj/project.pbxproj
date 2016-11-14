@@ -24,6 +24,7 @@
 		5DC72EAE1D2186C800E17706 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC72EAD1D2186C800E17706 /* SwiftyJSON.swift */; };
 		5DF0E7CE1D22CAC300F1C764 /* RARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF0E7CD1D22CAC300F1C764 /* RARequestViewController.swift */; };
 		5DF9B0C71D2589E200DCF688 /* RAAlwaysActivePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF9B0C61D2589E200DCF688 /* RAAlwaysActivePanel.swift */; };
+		AE309A7E1DDA64E70055C4CD /* RAExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE309A7D1DDA64E70055C4CD /* RAExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		7072E3A9AB04CBF6368ABF65 /* Pods_R_a_dioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_R_a_dioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D22AD193B24A0378121223 /* Pods-R-a-dio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dio/Pods-R-a-dio.debug.xcconfig"; sourceTree = "<group>"; };
 		A4C2EB1D001B20B5E9AD5C63 /* Pods-R-a-dioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dioTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dioTests/Pods-R-a-dioTests.release.xcconfig"; sourceTree = "<group>"; };
+		AE309A7D1DDA64E70055C4CD /* RAExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAExtensions.swift; sourceTree = "<group>"; };
 		C5EAD1303242AFD079809E11 /* Pods_R_a_dioUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_R_a_dioUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61C0D4B1C6DA2094822701E /* Pods-R-a-dioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-R-a-dioUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-R-a-dioUITests/Pods-R-a-dioUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				5DB96ABC1D218807009B497F /* RARadioUtilities.swift */,
+				AE309A7D1DDA64E70055C4CD /* RAExtensions.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -249,12 +252,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DC72EA01D21724200E17706 /* Build configuration list for PBXNativeTarget "R-a-dio" */;
 			buildPhases = (
-				19188D959FA977A6CF017D6E /* 📦 Check Pods Manifest.lock */,
+				19188D959FA977A6CF017D6E /* [CP] Check Pods Manifest.lock */,
 				5DC72E771D21724200E17706 /* Sources */,
 				5DC72E781D21724200E17706 /* Frameworks */,
 				5DC72E791D21724200E17706 /* Resources */,
-				B090CB98E8B278FD5D10BC5F /* 📦 Embed Pods Frameworks */,
-				E4881CA7D145975B9E13936E /* 📦 Copy Pods Resources */,
+				B090CB98E8B278FD5D10BC5F /* [CP] Embed Pods Frameworks */,
+				E4881CA7D145975B9E13936E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -269,12 +272,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DC72EA31D21724200E17706 /* Build configuration list for PBXNativeTarget "R-a-dioTests" */;
 			buildPhases = (
-				AF93084072E4B81074FEB44F /* 📦 Check Pods Manifest.lock */,
+				AF93084072E4B81074FEB44F /* [CP] Check Pods Manifest.lock */,
 				5DC72E881D21724200E17706 /* Sources */,
 				5DC72E891D21724200E17706 /* Frameworks */,
 				5DC72E8A1D21724200E17706 /* Resources */,
-				D292B970A74865F0B6AFEF30 /* 📦 Embed Pods Frameworks */,
-				809819AD0D84C3148BE3253C /* 📦 Copy Pods Resources */,
+				D292B970A74865F0B6AFEF30 /* [CP] Embed Pods Frameworks */,
+				809819AD0D84C3148BE3253C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -290,11 +293,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DC72EA61D21724200E17706 /* Build configuration list for PBXNativeTarget "R-a-dioUITests" */;
 			buildPhases = (
-				F019BC0B0D2BC1593477D37E /* 📦 Check Pods Manifest.lock */,
+				F019BC0B0D2BC1593477D37E /* [CP] Check Pods Manifest.lock */,
 				5DC72E931D21724200E17706 /* Sources */,
 				5DC72E941D21724200E17706 /* Frameworks */,
 				5DC72E951D21724200E17706 /* Resources */,
-				3F5EE401390C4BD313CE05CB /* 📦 Copy Pods Resources */,
+				3F5EE401390C4BD313CE05CB /* [CP] Copy Pods Resources */,
+				256544A76DC28CDF10B4690E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -318,13 +322,16 @@
 				TargetAttributes = {
 					5DC72E7A1D21724200E17706 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 					};
 					5DC72E8B1D21724200E17706 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 						TestTargetID = 5DC72E7A1D21724200E17706;
 					};
 					5DC72E961D21724200E17706 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 						TestTargetID = 5DC72E7A1D21724200E17706;
 					};
 				};
@@ -376,29 +383,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19188D959FA977A6CF017D6E /* 📦 Check Pods Manifest.lock */ = {
+		19188D959FA977A6CF017D6E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3F5EE401390C4BD313CE05CB /* 📦 Copy Pods Resources */ = {
+		256544A76DC28CDF10B4690E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-R-a-dioUITests/Pods-R-a-dioUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F5EE401390C4BD313CE05CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,14 +428,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-R-a-dioUITests/Pods-R-a-dioUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		809819AD0D84C3148BE3253C /* 📦 Copy Pods Resources */ = {
+		809819AD0D84C3148BE3253C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,29 +443,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-R-a-dioTests/Pods-R-a-dioTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AF93084072E4B81074FEB44F /* 📦 Check Pods Manifest.lock */ = {
+		AF93084072E4B81074FEB44F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B090CB98E8B278FD5D10BC5F /* 📦 Embed Pods Frameworks */ = {
+		B090CB98E8B278FD5D10BC5F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,14 +473,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-R-a-dio/Pods-R-a-dio-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D292B970A74865F0B6AFEF30 /* 📦 Embed Pods Frameworks */ = {
+		D292B970A74865F0B6AFEF30 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,14 +488,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-R-a-dioTests/Pods-R-a-dioTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E4881CA7D145975B9E13936E /* 📦 Copy Pods Resources */ = {
+		E4881CA7D145975B9E13936E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,19 +503,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-R-a-dio/Pods-R-a-dio-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F019BC0B0D2BC1593477D37E /* 📦 Check Pods Manifest.lock */ = {
+		F019BC0B0D2BC1593477D37E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -512,6 +534,7 @@
 				5D14D8011D23033000022571 /* RAPreferences.swift in Sources */,
 				5DC72E7F1D21724200E17706 /* AppDelegate.swift in Sources */,
 				5DB96ABD1D218807009B497F /* RARadioUtilities.swift in Sources */,
+				AE309A7E1DDA64E70055C4CD /* RAExtensions.swift in Sources */,
 				5DF0E7CE1D22CAC300F1C764 /* RARequestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,9 +670,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "R-a-dio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "drabweb.R-a-dio";
 				PRODUCT_NAME = "R-a-dio";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -661,9 +685,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "R-a-dio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "drabweb.R-a-dio";
 				PRODUCT_NAME = "R-a-dio";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -677,6 +702,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "drabweb.R-a-dioTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/R-a-dio.app/Contents/MacOS/R-a-dio";
 			};
 			name = Debug;
@@ -691,6 +717,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "drabweb.R-a-dioTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/R-a-dio.app/Contents/MacOS/R-a-dio";
 			};
 			name = Release;
@@ -704,6 +731,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "drabweb.R-a-dioUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "R-a-dio";
 				USES_XCTRUNNER = YES;
 			};
@@ -718,6 +746,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "drabweb.R-a-dioUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "R-a-dio";
 				USES_XCTRUNNER = YES;
 			};

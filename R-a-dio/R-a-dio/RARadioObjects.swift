@@ -53,27 +53,27 @@ class RASong {
     var id : Int = -1;
     
     /// The date this song starts/started at
-    var startTime : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(0));
+    var startTime : Date = Date(timeIntervalSince1970: TimeInterval(0));
     
     /// The date this song ended/ends at(Only applies if this is the current playing song)
-    var endTime : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(0));
+    var endTime : Date = Date(timeIntervalSince1970: TimeInterval(0));
     
     /// Returns the display string for how many minutes until this song starts/how many minutes ago it ended(E.g. "5 mins" or "less than a min")
     var startTimeFromNow : String {
         /// The date components of the difference of the current date and startTime
-        var nowStartDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: NSDate(timeIntervalSince1970: NSDate().timeIntervalSinceDate(self.startTime)));
+        var nowStartDateComponents : DateComponents = (Calendar.current as NSCalendar).components([.minute, .second], from: Date(timeIntervalSince1970: Date().timeIntervalSince(self.startTime)));
         
         // If the difference between the current date and startTime is negative...
-        if(NSDate().timeIntervalSinceDate(self.startTime) < 0) {
+        if(Date().timeIntervalSince(self.startTime) < 0) {
             // Swap their positions and update nowStartDateComponents
-            nowStartDateComponents = NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: NSDate(timeIntervalSince1970: self.startTime.timeIntervalSinceDate(NSDate())));
+            nowStartDateComponents = (Calendar.current as NSCalendar).components([.minute, .second], from: Date(timeIntervalSince1970: self.startTime.timeIntervalSince(Date())));
         }
         
         /// How many minutes until the song starts/ago it ended
-        var minutes : Int = nowStartDateComponents.minute;
+        var minutes : Int = nowStartDateComponents.minute!;
         
         // If the seconds are more than or equal to 30...
-        if(nowStartDateComponents.second >= 30) {
+        if(nowStartDateComponents.second! >= 30) {
             // Add one to minutes for rounding
             minutes += 1;
         }
@@ -91,17 +91,17 @@ class RASong {
     }
     
     /// Returns the NSDate for the duration of this song
-    var durationDate : NSDate {
-        return NSDate(timeIntervalSince1970: self.endTime.timeIntervalSinceDate(self.startTime));
+    var durationDate : Date {
+        return Date(timeIntervalSince1970: self.endTime.timeIntervalSince(self.startTime));
     }
     
     /// The display label for the duration of this song
     var durationString : String {
         /// The minute and second components of durationDate
-        let durationDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: durationDate);
+        let durationDateComponents : DateComponents = (Calendar.current as NSCalendar).components([NSCalendar.Unit.minute, NSCalendar.Unit.second], from: durationDate);
         
         /// The display string for the seconds value
-        var secondsString : String = String(durationDateComponents.second);
+        var secondsString : String = String(describing: durationDateComponents.second!);
         
         // If there is only one character in secondsString...
         if(secondsString.characters.count == 1) {
@@ -110,20 +110,20 @@ class RASong {
         }
         
         // Return the duration string
-        return "\(durationDateComponents.minute):\(secondsString)";
+        return "\(durationDateComponents.minute!):\(secondsString)";
     }
     
     /// The duration of this song, in seconds
     var durationSeconds : Int {
         /// The date components for duration of this song
-        let durationDateComponents : NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Second, NSCalendarUnit.Minute], fromDate: durationDate);
+        let durationDateComponents : DateComponents = (Calendar.current as NSCalendar).components([NSCalendar.Unit.second, NSCalendar.Unit.minute], from: durationDate);
         
         // Return the duration in seconds
-        return durationDateComponents.second + (durationDateComponents.minute * 60);
+        return durationDateComponents.second! + (durationDateComponents.minute! * 60);
     }
     
     // Init with a name, start time and end time
-    init(name : String, startTime : NSDate, endTime : NSDate) {
+    init(name : String, startTime : Date, endTime : Date) {
         self.name = name;
         self.startTime = startTime;
         self.endTime = endTime;
@@ -132,14 +132,14 @@ class RASong {
     // Init with JSON
     init(json : JSON) {
         self.name = json["meta"].stringValue;
-        self.startTime = NSDate(timeIntervalSince1970: NSTimeInterval(json["timestamp"].intValue));
+        self.startTime = Date(timeIntervalSince1970: TimeInterval(json["timestamp"].intValue));
     }
     
     // Blank init
     init() {
         self.name = "";
-        self.startTime = NSDate(timeIntervalSince1970: NSTimeInterval(0));
-        self.endTime = NSDate(timeIntervalSince1970: NSTimeInterval(0));
+        self.startTime = Date(timeIntervalSince1970: TimeInterval(0));
+        self.endTime = Date(timeIntervalSince1970: TimeInterval(0));
     }
 }
 
@@ -161,7 +161,7 @@ class RASearchSong: NSObject {
     var favourited : Bool = false;
     
     /// Returns if this RASearchSong is equal to another RASearchSong
-    func equals(song : RASearchSong) -> Bool {
+    func equals(_ song : RASearchSong) -> Bool {
         // Return if the artist, title and id are the same for this song and the given song
         return (self.artist == song.artist && self.title == song.title && self.id == song.id);
     }
@@ -186,24 +186,24 @@ class RASearchSong: NSObject {
         self.requestable = json["requestable"].boolValue;
     }
     
-    func encodeWithCoder(coder: NSCoder) {
+    func encodeWithCoder(_ coder: NSCoder) {
         // Encode the values
-        coder.encodeObject(self.artist, forKey: "artist");
-        coder.encodeObject(self.title, forKey: "title");
-        coder.encodeObject(self.id, forKey: "id");
-        coder.encodeObject(self.requestable, forKey: "requestable");
-        coder.encodeObject(self.favourited, forKey: "favourited");
+        coder.encode(self.artist, forKey: "artist");
+        coder.encode(self.title, forKey: "title");
+        coder.encode(self.id, forKey: "id");
+        coder.encode(self.requestable, forKey: "requestable");
+        coder.encode(self.favourited, forKey: "favourited");
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
         
         // Decode and load the values
-        self.artist = (decoder.decodeObjectForKey("artist") as! String?)!;
-        self.title = (decoder.decodeObjectForKey("title") as! String?)!;
-        self.id = (decoder.decodeObjectForKey("id") as! Int?)!;
-        self.requestable = (decoder.decodeObjectForKey("requestable") as! Bool?)!;
-        self.favourited = (decoder.decodeObjectForKey("favourited") as! Bool?)!;
+        self.artist = (decoder.decodeObject(forKey: "artist") as! String?)!;
+        self.title = (decoder.decodeObject(forKey: "title") as! String?)!;
+        self.id = (decoder.decodeObject(forKey: "id") as! Int?)!;
+        self.requestable = (decoder.decodeObject(forKey: "requestable") as! Bool?)!;
+        self.favourited = (decoder.decodeObject(forKey: "favourited") as! Bool?)!;
     }
 }
 
@@ -213,18 +213,18 @@ class RARadioInfo {
     var currentSong : RASong = RASong();
     
     /// The position of the current song
-    var currentSongPosition : NSDate = NSDate(timeIntervalSince1970: NSTimeInterval(0));
+    var currentSongPosition : Date = Date(timeIntervalSince1970: TimeInterval(0));
     
     /// Returns the date components of currentSongPosition(Minutes and Seconds)
-    var currrentSongPositionDateComponents : NSDateComponents {
+    var currrentSongPositionDateComponents : DateComponents {
         // Return the date components
-        return NSCalendar.currentCalendar().components([.Minute, .Second], fromDate: currentSongPosition);
+        return (Calendar.current as NSCalendar).components([.minute, .second], from: currentSongPosition);
     }
     
     /// Calculates currentSongPosition and sets it, based on it's current value
     func updateCurrentSongPosition() {
         // Calculate and set currentSongPosition
-        self.currentSongPosition = NSDate(timeIntervalSince1970: self.currentSongPosition.timeIntervalSince1970 - self.currentSong.startTime.timeIntervalSince1970);
+        self.currentSongPosition = Date(timeIntervalSince1970: self.currentSongPosition.timeIntervalSince1970 - self.currentSong.startTime.timeIntervalSince1970);
     }
     
     /// The current DJ

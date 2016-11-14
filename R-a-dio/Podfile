@@ -6,7 +6,7 @@ target 'R-a-dio' do
   use_frameworks!
 
   # Pods for R-a-dio
-  pod 'Alamofire', '3.1.0'
+  pod 'Alamofire', '4.0.1'
 
   target 'R-a-dioTests' do
     inherit! :search_paths

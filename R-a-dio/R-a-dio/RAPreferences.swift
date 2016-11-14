@@ -17,12 +17,12 @@ class RAPreferences: NSObject {
     var favouriteSongs : [RASearchSong] = [];
     
     /// Returns if the given RASearchSong is favourited
-    func songIsFavourited(song : RASearchSong) -> Bool {
+    func songIsFavourited(_ song : RASearchSong) -> Bool {
         /// Is the given song favourited?
         var favourited : Bool = false;
         
         // For every song in favouriteSongs...
-        for(_, currentSong) in favouriteSongs.enumerate() {
+        for(_, currentSong) in favouriteSongs.enumerated() {
             // If the current song's ID is equal to the given song's ID...
             if(currentSong.id == song.id) {
                 // Set favourited to true and break the loop
@@ -36,7 +36,7 @@ class RAPreferences: NSObject {
     }
     
     /// Adds the given RASearchSong to favouriteSongs
-    func addSongToFavourites(song : RASearchSong) {
+    func addSongToFavourites(_ song : RASearchSong) {
         // Print what song we are adding to favourites
         print("RAPreferences: Adding \(song.artist) - \(song.title)(\(song.id)) to favourites");
         
@@ -45,7 +45,7 @@ class RAPreferences: NSObject {
     }
     
     /// Removes the given RASearchSong from favouriteSongs
-    func removeSongFromFavourites(song : RASearchSong) {
+    func removeSongFromFavourites(_ song : RASearchSong) {
         // Print what song we are removing from favourites
         print("RAPreferences: Removing \(song.artist) - \(song.title)(\(song.id)) from favourites");
         
@@ -54,7 +54,7 @@ class RAPreferences: NSObject {
         var newFavouriteSongs : [RASearchSong] = [];
         
         // For every item in favouriteSongs...
-        for(_, currentSong) in favouriteSongs.enumerate() {
+        for(_, currentSong) in favouriteSongs.enumerated() {
             // If the current song's ID isnt equal to the given song's ID...
             if(currentSong.id != song.id) {
                 // Add the current song to newFavouriteSongs
@@ -66,22 +66,22 @@ class RAPreferences: NSObject {
         favouriteSongs = newFavouriteSongs;
     }
     
-    func encodeWithCoder(coder: NSCoder) {
+    func encodeWithCoder(_ coder: NSCoder) {
         // Encode the values
-        coder.encodeObject(self.volume, forKey: "volume");
-        coder.encodeObject(self.favouriteSongs, forKey: "favouriteSongs");
+        coder.encode(self.volume, forKey: "volume");
+        coder.encode(self.favouriteSongs, forKey: "favouriteSongs");
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
         
         // Decode and load the values
-        if(decoder.decodeObjectForKey("volume") != nil) {
-            self.volume = (decoder.decodeObjectForKey("volume") as! Float?)!;
+        if(decoder.decodeObject(forKey: "volume") != nil) {
+            self.volume = (decoder.decodeObject(forKey: "volume") as! Float?)!;
         }
         
-        if(decoder.decodeObjectForKey("favouriteSongs") != nil) {
-            self.favouriteSongs = (decoder.decodeObjectForKey("favouriteSongs") as? [RASearchSong])!;
+        if(decoder.decodeObject(forKey: "favouriteSongs") != nil) {
+            self.favouriteSongs = (decoder.decodeObject(forKey: "favouriteSongs") as? [RASearchSong])!;
         }
     }
 }

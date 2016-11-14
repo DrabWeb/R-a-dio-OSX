@@ -33,23 +33,23 @@ class RASongListTableViewCell: NSTableCellView {
     var representedSong : RASearchSong? = nil;
     
     /// Displays the data from the given RASearchSong in this cell
-    func displaySong(song : RASearchSong) {
+    func displaySong(_ song : RASearchSong) {
         // Set representedSong
         representedSong = song;
         
         // Display the data
         songNameLabel.stringValue = "\(song.artist) - \(song.title)";
-        favouriteButton.state = Int(song.favourited);
+        favouriteButton.state = Int.fromBool(bool: song.favourited);
         updateFavouriteButton();
-        requestButton.enabled = song.requestable;
+        requestButton.isEnabled = song.requestable;
         
         // Set the favourite button's target and action
         favouriteButton.target = self;
-        favouriteButton.action = Selector("favouriteButtonPressed");
+        favouriteButton.action = #selector(RASongListTableViewCell.favouriteButtonPressed);
         
         // Set the request button's target and action
         requestButton.target = self;
-        requestButton.action = Selector("requestButtonPressed");
+        requestButton.action = #selector(RASongListTableViewCell.requestButtonPressed);
     }
     
     /// Called when favouriteButton is pressed
@@ -61,7 +61,7 @@ class RASongListTableViewCell: NSTableCellView {
         updateFavouriteButton();
         
         // Call the user's favourite button pressed target and action
-        favouriteButtonTarget?.performSelector(favouriteButtonAction, withObject: representedSong!);
+        favouriteButtonTarget?.perform(favouriteButtonAction, with: representedSong!);
     }
     
     /// Updates the favourite button image to match the represented song's favourited state
@@ -78,6 +78,6 @@ class RASongListTableViewCell: NSTableCellView {
     /// Called when requestButton is pressed
     func requestButtonPressed() {
         // Call the user's favourite button pressed target and action
-        requestButtonTarget?.performSelector(requestButtonAction, withObject: representedSong!);
+        requestButtonTarget?.perform(requestButtonAction, with: representedSong!);
     }
 }
