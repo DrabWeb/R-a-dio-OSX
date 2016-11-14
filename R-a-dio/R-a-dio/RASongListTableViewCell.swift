@@ -18,7 +18,7 @@ class RASongListTableViewCell: NSTableCellView {
     var favouriteButtonTarget : AnyObject? = nil;
     
     /// The selector to perform when favouriteButton is pressed, passed this cell's represented song
-    var favouriteButtonAction : Selector = Selector("");
+    var favouriteButtonAction : Selector? = nil;
     
     /// The button that the user can press to request to play the song this cell represents
     @IBOutlet var requestButton: NSButton!
@@ -27,7 +27,7 @@ class RASongListTableViewCell: NSTableCellView {
     var requestButtonTarget : AnyObject? = nil;
     
     /// The selector to perform when requestButton is pressed, passed this cell's represented song
-    var requestButtonAction : Selector = Selector("");
+    var requestButtonAction : Selector? = nil;
     
     /// The RASearchSong this cell represents
     var representedSong : RASearchSong? = nil;
@@ -61,7 +61,9 @@ class RASongListTableViewCell: NSTableCellView {
         updateFavouriteButton();
         
         // Call the user's favourite button pressed target and action
-        favouriteButtonTarget?.perform(favouriteButtonAction, with: representedSong!);
+        if(favouriteButtonAction != nil && favouriteButtonTarget != nil) {
+            favouriteButtonTarget!.perform(favouriteButtonAction!, with: representedSong!);
+        }
     }
     
     /// Updates the favourite button image to match the represented song's favourited state
@@ -77,7 +79,9 @@ class RASongListTableViewCell: NSTableCellView {
     
     /// Called when requestButton is pressed
     func requestButtonPressed() {
-        // Call the user's favourite button pressed target and action
-        requestButtonTarget?.perform(requestButtonAction, with: representedSong!);
+        // Call the user's request button pressed target and action
+        if(requestButtonAction != nil && requestButtonTarget != nil) {
+            requestButtonTarget!.perform(requestButtonAction!, with: representedSong!);
+        }
     }
 }

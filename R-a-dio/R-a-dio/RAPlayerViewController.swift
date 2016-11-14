@@ -45,7 +45,7 @@ class RAPlayerViewController: NSViewController {
         let lastPlayedMenu : NSMenu = NSMenu();
         
         // Add the "Last Played" header item
-        lastPlayedMenu.addItem(withTitle: "Last Played", action: Selector(""), keyEquivalent: "");
+        lastPlayedMenu.addItem(withTitle: "Last Played", action: nil, keyEquivalent: "");
         
         // Add a separator
         lastPlayedMenu.addItem(NSMenuItem.separator());
@@ -53,7 +53,7 @@ class RAPlayerViewController: NSViewController {
         // For every song in the last played songs in currentRadioInfo...
         for(_, currentLastPlayedSong) in currentRadioInfo.lastPlayed.enumerated() {
             // Add an item with the current song's title with how long ago it played to lastPlayedMenu
-            lastPlayedMenu.addItem(withTitle: "\(currentLastPlayedSong.name) - \(currentLastPlayedSong.startTimeFromNow) ago", action: Selector(""), keyEquivalent: "");
+            lastPlayedMenu.addItem(withTitle: "\(currentLastPlayedSong.name) - \(currentLastPlayedSong.startTimeFromNow) ago", action: nil, keyEquivalent: "");
         }
         
         // Show the last played menu at the last played button's position
@@ -66,7 +66,7 @@ class RAPlayerViewController: NSViewController {
         let queueMenu : NSMenu = NSMenu();
         
         // Add the "Queue" header item
-        queueMenu.addItem(withTitle: "Queue", action: Selector(""), keyEquivalent: "");
+        queueMenu.addItem(withTitle: "Queue", action: nil, keyEquivalent: "");
         
         // Add a separator
         queueMenu.addItem(NSMenuItem.separator());
@@ -74,7 +74,7 @@ class RAPlayerViewController: NSViewController {
         // For every song in the queued songs in currentRadioInfo...
         for(_, currentQueuedSong) in currentRadioInfo.queue.enumerated() {
             // Add an item with the current song's title with it's start time to queueMenu
-            queueMenu.addItem(withTitle: "\(currentQueuedSong.name) - in \(currentQueuedSong.startTimeFromNow)", action: Selector(""), keyEquivalent: "");
+            queueMenu.addItem(withTitle: "\(currentQueuedSong.name) - in \(currentQueuedSong.startTimeFromNow)", action: nil, keyEquivalent: "");
         }
         
         // Show the queued songs menu at the queued songs button's position
@@ -87,7 +87,7 @@ class RAPlayerViewController: NSViewController {
     /// When favouriteButton is pressed...
     @IBAction func favouriteButtonPressed(_ sender: NSButton) {
         // Toggle the state
-        favouriteButton.state == Int.fromBool(bool: !Bool(favouriteButton.state as NSNumber));
+        favouriteButton.state = Int.fromBool(bool: !Bool(favouriteButton.state as NSNumber));
         
         // If the favourited button is now on...
         if(Bool(favouriteButton.state as NSNumber)) {
