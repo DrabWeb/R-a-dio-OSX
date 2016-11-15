@@ -140,21 +140,32 @@ class RAPlayerViewController: NSViewController {
     
     /// When the user presses pausePlayButton...
     @IBAction func pausePlayButtonPressed(_ sender: NSButton) {
-        // If the r/a/dio player is playing...
-        if(!radioPlayer!.isMuted) {
-            // "Pause" it(Mute it)
-            radioPlayer!.isMuted = true;
-            
-            // Update pausePlayButton
-            pausePlayButton.image = NSImage(named: "RAPlayIcon");
-        }
-        // If the r/a/dio player is paused...
-        else {
-            // "Play" it(Un-mute it)
-            radioPlayer!.isMuted = false;
-            
+        // If the r/a/dio is stopped...
+        if(radioStopped) {
+            // Start the r/a/dio
+            playRadio();
+                
             // Update pausePlayButton
             pausePlayButton.image = NSImage(named: "RAPauseIcon");
+        }
+        // If the r/a/dio isn't stopped...
+        else {
+            // If the r/a/dio player is playing...
+            if(!radioPlayer!.isMuted) {
+                // "Pause" it(Mute it)
+                radioPlayer!.isMuted = true;
+                
+                // Update pausePlayButton
+                pausePlayButton.image = NSImage(named: "RAPlayIcon");
+            }
+            // If the r/a/dio player is paused...
+            else {
+                // "Play" it(Un-mute it)
+                radioPlayer!.isMuted = false;
+                
+                // Update pausePlayButton
+                pausePlayButton.image = NSImage(named: "RAPauseIcon");
+            }
         }
     }
     
@@ -163,7 +174,8 @@ class RAPlayerViewController: NSViewController {
     
     /// When the user presses stopButton...
     @IBAction func stopButtonPressed(_ sender: NSButton) {
-        
+        // Stop the r/a/dio
+        stopRadio();
     }
     
     /// The label that shows the position of the current song
@@ -192,6 +204,9 @@ class RAPlayerViewController: NSViewController {
     
     /// The position of the current song, in seconds
     var currentSongPositionSeconds : Int = 0;
+    
+    /// Is the r/a/dio stopped?
+    var radioStopped : Bool = true;
     
     /// The display string for currentSongPositionSeconds, in the format "MM:SS"
     var currentSongPositionSecondsString : String {
@@ -233,6 +248,9 @@ class RAPlayerViewController: NSViewController {
         // Add the song request menu item
         menu.addItem(songRequestMenuItem);
         
+        // Add a separator
+        menu.addItem(NSMenuItem.separator());
+        
         // Add the quit menu item
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(RAPlayerViewController.quit), keyEquivalent: "q"));
         
@@ -254,9 +272,6 @@ class RAPlayerViewController: NSViewController {
         // Allow the DJ image view to animate
         currentDjImageView.canDrawSubviewsIntoLayer = true;
         
-        // Style the window
-        styleWindow();
-        
         // Re-apply the theme
         reapplyTheme();
         
@@ -269,20 +284,11 @@ class RAPlayerViewController: NSViewController {
         // Start the reload timer
         Timer.scheduledTimer(timeInterval: TimeInterval(10), target: self, selector: #selector(RAPlayerViewController.reloadRadioInfoLoop), userInfo: nil, repeats: true);
         
-        // Create radioPlayer
-        radioPlayer = AVPlayer(url: URL(string: "https://stream.r-a-d.io/main.mp3")!);
-        
-        // Observe radioPlayer's status so we can play it when it loads
-        radioPlayer!.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil);
-        
-        // Start the loading spinner
-        loadingSpinner.startAnimation(self);
-        
         // Load the previously set volume into the volume slider
         volumeSlider.floatValue = (NSApplication.shared().delegate as! AppDelegate).preferences.volume;
         
-        // Do the initial volume update
-        radioPlayer!.volume = volumeSlider.floatValue;
+        // Start the r/a/dio
+        playRadio();
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -300,6 +306,10 @@ class RAPlayerViewController: NSViewController {
                 // Show and enable the pause/play button
                 pausePlayButton.isHidden = false;
                 pausePlayButton.isEnabled = true;
+                
+                // Show and enable the stop button
+                stopButton.isHidden = false;
+                stopButton.isEnabled = true;
             }
             // If the r/a/dio player failed...
             else if(radioPlayer!.status == AVPlayerStatus.failed) {
@@ -307,6 +317,67 @@ class RAPlayerViewController: NSViewController {
                 print("RAPlayerViewController: Failed to load r/a/dio player");
             }
         }
+    }
+    
+    /// Starts playing the r/a/dio
+    func playRadio() {
+        // Print that we are starting the r/a/dio
+        print("RAPlayerViewController: Starting the r/a/dio");
+        
+        // Say that the r/a/dio isn't stopped
+        radioStopped = false;
+        
+        // Update the stop button
+        stopButton.isEnabled = true;
+        
+        // Show the loading spinner
+        loadingSpinner.isHidden = false;
+        
+        // Hide and disable the pause/play button
+        pausePlayButton.isHidden = true;
+        pausePlayButton.isEnabled = false;
+        
+        // Hide and disable the stop button
+        stopButton.isHidden = true;
+        stopButton.isEnabled = false;
+        
+        // Create radioPlayer
+        radioPlayer = AVPlayer(url: URL(string: "https://stream.r-a-d.io/main.mp3")!);
+        
+        // Observe radioPlayer's status so we can play it when it loads
+        radioPlayer!.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil);
+        
+        // Start the loading spinner
+        loadingSpinner.startAnimation(self);
+        
+        // Do the initial volume update
+        radioPlayer!.volume = volumeSlider.floatValue;
+    }
+    
+    /// Stops playing the r/a/dio
+    func stopRadio() {
+        // Print that we are stopping the r/a/dio
+        print("RAPlayerViewController: Stopping the r/a/dio");
+        
+        // Say the r/a/dio is stopped
+        radioStopped = true;
+        
+        // Show and enable the pause/play button
+        pausePlayButton.isHidden = false;
+        pausePlayButton.isEnabled = true;
+        
+        // Show and disable the stop button
+        stopButton.isHidden = false;
+        stopButton.isEnabled = false;
+        
+        // Update pausePlayButton
+        pausePlayButton.image = NSImage(named: "RAPlayIcon");
+        
+        // Remove the r/a/dio player observer
+        radioPlayer!.removeObserver(self, forKeyPath: "status");
+        
+        // Destroy the r/a/dio player
+        radioPlayer = nil;
     }
     
     /// The 5 second loop that calls reloadRadioInfo, but only when this view controller is open
@@ -321,7 +392,7 @@ class RAPlayerViewController: NSViewController {
     /// Downloads the radio info from r/a/dio and displays it
     func reloadRadioInfo() {
         // Print that we are downloading the radio info
-        print("RAPlayerViewController: Downloading radio info");
+        print("RAPlayerViewController: Downloading r/a/dio info");
         
         // Download the info and display it
         RARadioUtilities().getCurrentData(displayRadioInfo);
@@ -330,7 +401,7 @@ class RAPlayerViewController: NSViewController {
     /// Displays the data from the given RARadioInfo
     func displayRadioInfo(_ radioInfo : RARadioInfo) {
         // Print what we are displaying
-        print("RAPlayerViewController: Displaying radio info");
+        print("RAPlayerViewController: Displaying r/a/dio info");
         
         // Set currentRadioInfo
         currentRadioInfo = radioInfo;
@@ -452,13 +523,6 @@ class RAPlayerViewController: NSViewController {
             backgroundVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
             volumeBarVisualEffectView.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
         }
-    }
-    
-    /// Styles the window
-    func styleWindow() {
-        // Hide and disable the pause/play button
-        pausePlayButton.isHidden = true;
-        pausePlayButton.isEnabled = false;
     }
 }
 

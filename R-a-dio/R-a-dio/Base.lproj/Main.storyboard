@@ -880,13 +880,13 @@
                                             <action selector="pausePlayButtonPressed:" target="XfG-lQ-9wD" id="fed-ox-WiI"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-bh-0q7" userLabel="Stop Button">
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-bh-0q7" userLabel="Stop Button">
                                         <rect key="frame" x="158" y="49" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="4nX-hS-qSu"/>
                                             <constraint firstAttribute="width" constant="24" id="Y36-mk-F3w"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="RAStopIcon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D50-DY-UVm">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="RAStopIcon" imagePosition="overlaps" alignment="center" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="D50-DY-UVm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
