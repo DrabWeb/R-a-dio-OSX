@@ -201,9 +201,9 @@ class RASearchSong: NSObject {
         // Decode and load the values
         self.artist = (decoder.decodeObject(forKey: "artist") as! String?)!;
         self.title = (decoder.decodeObject(forKey: "title") as! String?)!;
-        self.id = (decoder.decodeObject(forKey: "id") as! Int?)!;
-        self.requestable = (decoder.decodeObject(forKey: "requestable") as! Bool?)!;
-        self.favourited = (decoder.decodeObject(forKey: "favourited") as! Bool?)!;
+        self.id = decoder.decodeInteger(forKey: "id");
+        self.requestable = decoder.decodeBool(forKey: "requestable");
+        self.favourited = decoder.decodeBool(forKey: "favourited");
     }
 }
 

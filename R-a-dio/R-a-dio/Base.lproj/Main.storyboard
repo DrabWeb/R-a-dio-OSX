@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +675,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="6zs-8k-TUN">
+                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="6zs-8k-TUN">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="27" horizontalPageScroll="10" verticalLineScroll="27" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAv-mp-bzt" userLabel="Scroll View - Songs Table View">
@@ -683,7 +685,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="25" viewBased="YES" id="488-Bu-So9" userLabel="Songs Table View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="440" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="440" height="200"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -764,7 +766,6 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="R2Y-h8-qY8">
                                             <rect key="frame" x="0.0" y="184" width="440" height="16"/>
@@ -823,7 +824,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="438" height="122"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-Hs-aHA">
+                            <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-Hs-aHA">
                                 <rect key="frame" x="25" y="0.0" width="413" height="122"/>
                                 <subviews>
                                     <button toolTip="View last played" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="p1Q-Gc-lkO" userLabel="Last Played Button">
@@ -968,7 +969,7 @@
                                     <constraint firstItem="hTT-Ri-HO1" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" constant="8" id="zwe-su-aNk"/>
                                 </constraints>
                             </visualEffectView>
-                            <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="4wM-em-LAw" userLabel="Volume Bar Visual Effect View">
+                            <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="4wM-em-LAw" userLabel="Volume Bar Visual Effect View">
                                 <rect key="frame" x="0.0" y="0.0" width="25" height="122"/>
                                 <subviews>
                                     <slider focusRingType="none" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FaM-eV-KCo" userLabel="Voume Slider">
