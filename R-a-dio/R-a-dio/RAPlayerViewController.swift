@@ -158,6 +158,14 @@ class RAPlayerViewController: NSViewController {
         }
     }
     
+    /// The stop button
+    @IBOutlet weak var stopButton: NSButton!
+    
+    /// When the user presses stopButton...
+    @IBAction func stopButtonPressed(_ sender: NSButton) {
+        
+    }
+    
     /// The label that shows the position of the current song
     @IBOutlet var currentSongPositionLabel: NSTextField!
     

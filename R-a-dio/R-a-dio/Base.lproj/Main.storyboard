@@ -880,6 +880,20 @@
                                             <action selector="pausePlayButtonPressed:" target="XfG-lQ-9wD" id="fed-ox-WiI"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-bh-0q7" userLabel="Stop Button">
+                                        <rect key="frame" x="158" y="49" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="4nX-hS-qSu"/>
+                                            <constraint firstAttribute="width" constant="24" id="Y36-mk-F3w"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="RAStopIcon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D50-DY-UVm">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="stopButtonPressed:" target="XfG-lQ-9wD" id="e14-pt-zEQ"/>
+                                        </connections>
+                                    </button>
                                     <textField horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ape-5f-kMn" userLabel="Current Song Position">
                                         <rect key="frame" x="6" y="5" width="41" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="00:00" id="xqJ-WA-i6S">
@@ -939,17 +953,6 @@
                                         <connections>
                                             <segue destination="7uE-OS-fng" kind="show" id="2R6-e9-jDZ"/>
                                         </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-bh-0q7" userLabel="Stop Button">
-                                        <rect key="frame" x="158" y="49" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="4nX-hS-qSu"/>
-                                            <constraint firstAttribute="width" constant="24" id="Y36-mk-F3w"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="RAStopIcon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D50-DY-UVm">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1023,6 +1026,7 @@
                         <outlet property="pausePlayButton" destination="4ZK-yH-Fih" id="nSF-3Y-HJ9"/>
                         <outlet property="requestButton" destination="0nt-9X-Z0O" id="E09-Ug-Evn"/>
                         <outlet property="songTitleTextField" destination="hTT-Ri-HO1" id="LYm-RM-g8Q"/>
+                        <outlet property="stopButton" destination="IZi-bh-0q7" id="ndr-sJ-tpr"/>
                         <outlet property="volumeBarVisualEffectView" destination="4wM-em-LAw" id="lha-QS-1VO"/>
                         <outlet property="volumeSlider" destination="FaM-eV-KCo" id="bIM-Qq-8Jq"/>
                     </connections>
