@@ -867,7 +867,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button focusRingType="none" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4ZK-yH-Fih" userLabel="Pause/Play Button">
-                                        <rect key="frame" x="134" y="49" width="24" height="24"/>
+                                        <rect key="frame" x="110" y="49" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="GBg-Wc-XXj"/>
                                             <constraint firstAttribute="height" constant="24" id="Wu3-1z-a4M"/>
@@ -940,6 +940,17 @@
                                             <segue destination="7uE-OS-fng" kind="show" id="2R6-e9-jDZ"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-bh-0q7" userLabel="Stop Button">
+                                        <rect key="frame" x="158" y="49" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="4nX-hS-qSu"/>
+                                            <constraint firstAttribute="width" constant="24" id="Y36-mk-F3w"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="RAStopIcon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D50-DY-UVm">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="x8M-u6-xYK" secondAttribute="bottom" id="2SF-DF-BLK"/>
@@ -954,12 +965,14 @@
                                     <constraint firstItem="p1Q-Gc-lkO" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" constant="8" id="T3t-x1-lCL"/>
                                     <constraint firstItem="0nt-9X-Z0O" firstAttribute="leading" secondItem="VTC-FY-jMW" secondAttribute="trailing" constant="8" id="TFY-ut-7V5"/>
                                     <constraint firstItem="fBK-Uz-ZUo" firstAttribute="centerX" secondItem="7u7-Hs-aHA" secondAttribute="centerX" constant="-61.5" id="TSF-qs-HKe"/>
-                                    <constraint firstItem="4ZK-yH-Fih" firstAttribute="centerX" secondItem="7u7-Hs-aHA" secondAttribute="centerX" constant="-60.5" id="VBe-uN-g01"/>
+                                    <constraint firstItem="4ZK-yH-Fih" firstAttribute="centerX" secondItem="7u7-Hs-aHA" secondAttribute="centerX" constant="-84.5" id="VBe-uN-g01"/>
                                     <constraint firstItem="ZvZ-OC-srA" firstAttribute="leading" secondItem="p1Q-Gc-lkO" secondAttribute="trailing" constant="8" id="Vrn-qh-Rnw"/>
                                     <constraint firstAttribute="bottom" secondItem="pAE-Af-ffp" secondAttribute="bottom" constant="4" id="X7o-ON-3S2"/>
                                     <constraint firstAttribute="bottom" secondItem="ape-5f-kMn" secondAttribute="bottom" constant="5" id="Xr9-pE-QYb"/>
                                     <constraint firstItem="p1Q-Gc-lkO" firstAttribute="leading" secondItem="7u7-Hs-aHA" secondAttribute="leading" constant="8" id="ZVl-J5-Zne"/>
+                                    <constraint firstItem="IZi-bh-0q7" firstAttribute="centerY" secondItem="7u7-Hs-aHA" secondAttribute="centerY" id="axR-aC-Zq4"/>
                                     <constraint firstItem="pAE-Af-ffp" firstAttribute="leading" secondItem="ape-5f-kMn" secondAttribute="trailing" constant="8" id="crc-hY-VFD"/>
+                                    <constraint firstItem="IZi-bh-0q7" firstAttribute="centerX" secondItem="7u7-Hs-aHA" secondAttribute="centerX" constant="-36.5" id="fTc-UT-mpp"/>
                                     <constraint firstItem="x8M-u6-xYK" firstAttribute="top" secondItem="7u7-Hs-aHA" secondAttribute="top" id="ikB-Eh-97w"/>
                                     <constraint firstItem="VTC-FY-jMW" firstAttribute="leading" secondItem="hTT-Ri-HO1" secondAttribute="trailing" constant="8" id="o4D-uQ-O4T"/>
                                     <constraint firstAttribute="bottom" secondItem="nW2-4o-b0b" secondAttribute="bottom" constant="5" id="q9n-qP-Wtt"/>
@@ -1028,5 +1041,6 @@
         <image name="RANotFavouritedIcon" width="256" height="256"/>
         <image name="RAPauseIcon" width="256" height="256"/>
         <image name="RAPlayIcon" width="256" height="256"/>
+        <image name="RAStopIcon" width="256" height="256"/>
     </resources>
 </document>

@@ -58,13 +58,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     /// Called when applicationStatusItem is pressed
     func applicationStatusItemPressed() {
-        // If the user is using the OSX dark theme...
-        if(NSAppearance.current().name.hasPrefix("NSAppearanceNameVibrantDark")) {
+        // If the user is using the macOS dark theme...
+        if(UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark") {
             // Set applicationTheme accordingly
             applicationTheme = .dark;
         }
-        // If the user is using the OSX light theme...
-        else if(NSAppearance.current().name.hasPrefix("NSAppearanceNameVibrantLight")) {
+        // If the user is using the macOS light theme...
+        else {
             // Set applicationTheme accordingly
             applicationTheme = .light;
         }
