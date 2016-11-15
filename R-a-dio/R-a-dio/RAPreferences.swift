@@ -40,6 +40,9 @@ class RAPreferences: NSObject {
         // Print what song we are adding to favourites
         print("RAPreferences: Adding \(song.artist) - \(song.title)(\(song.id)) to favourites");
         
+        // Set the song as favourited
+        song.favourited = true;
+        
         // Add the given song to favouriteSongs
         favouriteSongs.append(song);
     }
@@ -48,6 +51,9 @@ class RAPreferences: NSObject {
     func removeSongFromFavourites(_ song : RASearchSong) {
         // Print what song we are removing from favourites
         print("RAPreferences: Removing \(song.artist) - \(song.title)(\(song.id)) from favourites");
+        
+        // Set the song as not favourited
+        song.favourited = false;
         
         // Remove the given song from favouriteSongs
         /// favouriteSongs without song
