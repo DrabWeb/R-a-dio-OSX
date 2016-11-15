@@ -59,7 +59,7 @@ class RARequestViewController: NSViewController {
         
         // If the search query isnt blank...
         if(query != "") {
-            print("Searching for \(query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed))");
+            print("RARequestViewController: Searching for \(query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed))");
             // Make the search request
             lastSearchRequest = Alamofire.request("https://r-a-d.io/api/search/\(query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)").responseJSON { (responseData) -> Void in
                 /// The string of JSON that will be returned when the GET request finishes

@@ -86,9 +86,6 @@ class RAPlayerViewController: NSViewController {
     
     /// When favouriteButton is pressed...
     @IBAction func favouriteButtonPressed(_ sender: NSButton) {
-        // Toggle the state
-        favouriteButton.state = Int.fromBool(bool: !Bool(favouriteButton.state as NSNumber));
-        
         // If the favourited button is now on...
         if(Bool(favouriteButton.state as NSNumber)) {
             // Favourite the current playing song
